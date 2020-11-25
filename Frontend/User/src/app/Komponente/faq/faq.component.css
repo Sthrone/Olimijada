@@ -1,0 +1,10 @@
+#naslov
+{
+    width: 100%;
+    text-align: center;
+}
+
+mat-expansion-panel-header
+{
+    font-weight: bold;
+}

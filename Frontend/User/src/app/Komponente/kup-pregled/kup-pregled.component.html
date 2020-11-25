@@ -1,0 +1,256 @@
+<div *ngIf="text" class="container">
+		<div class="row malodole">
+                <div class="col-lg-4">
+                    <h3>{{turnir.naziv_turnira | uppercase}}</h3>
+                </div>
+                <div class="col-lg-2">
+                    
+					</div>
+                <div class="col-lg-5">
+                    <h5>{{text._569}}:
+                        <br/>
+                        <span class="c">{{turnir.datum_odigravanja | date:'medium'}}</span>
+                    </h5>
+                </div>
+			</div>
+			<br/>
+			<br/><br/>
+	<div class="tournament-bracket tournament-bracket--rounded">
+
+		<div class="tournament-bracket__round tournament-bracket__round--semifinals">
+			<h3 class="tournament-bracket__round-title">{{text._515}}</h3>
+			<ul class="tournament-bracket__list">
+				<li class="tournament-bracket__item">
+					<div [ngx-scroll-to]="'#destination'" (click)="izabraniMec(s_takmicar1, s_takmicar2, s_skor1, s_skor2, s_datum1, s_id1, s_id2, s_avatar1, s_avatar2)" class="tournament-bracket__match tim"
+					 tabindex="0">
+						<table class="tournament-bracket__table">
+							<caption class="tournament-bracket__caption" style="text-align: center;">
+								<time>{{s_datum1 | date : 'medium'}}</time>
+							</caption>
+							<thead class="sr-only">
+								<tr>
+									<th>Country</th>
+									<th>Score</th>
+								</tr>
+							</thead>
+							<tbody class="tournament-bracket__content">
+								<tr class="tournament-bracket__team {{pobedio(1)}}">
+									<td class="tournament-bracket__country">
+										<abbr class="tournament-bracket__code">{{s_takmicar1}}</abbr>
+										<span class="tournament-bracket__flag">
+											<img src="{{server}}/images/avatar/{{s_avatar1}}" class="avatar" [hidden]="!s_avatar1">
+										</span>
+									</td>
+									<td class="tournament-bracket__score {{prazno(s_skor1)}}">
+										<span class="tournament-bracket__number">{{s_skor1}}</span>
+									</td>
+								</tr>
+								<tr class="tournament-bracket__team {{pobedio(2)}}">
+									<td class="tournament-bracket__country">
+										<abbr class="tournament-bracket__code">{{s_takmicar2}}</abbr>
+										<span class="tournament-bracket__flag">
+											<img src="{{server}}/images/avatar/{{s_avatar2}}" class="avatar" [hidden]="!s_avatar2">
+										</span>
+									</td>
+									<td class="tournament-bracket__score {{prazno(s_skor2)}}" [hidden]="s_skor1 == undefined || s_skor1 == null">
+										<span class="tournament-bracket__number">{{s_skor2}}</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</li>
+
+				<li class="tournament-bracket__item">
+					<div [ngx-scroll-to]="'#destination'" (click)="izabraniMec(s_takmicar3, s_takmicar4, s_skor3, s_skor4, s_datum2, s_id3, s_id4, s_avatar3, s_avatar4)" class="tournament-bracket__match tim"
+					 tabindex="0">
+						<table class="tournament-bracket__table">
+							<caption class="tournament-bracket__caption" style="text-align: center;">
+								<time>{{s_datum2 | date : 'medium'}}</time>
+							</caption>
+							<thead class="sr-only">
+								<tr>
+									<th>Country</th>
+									<th>Score</th>
+								</tr>
+							</thead>
+							<tbody class="tournament-bracket__content" [hidden]="s_skor3 == null || s_skor4 == null">
+								<tr class="tournament-bracket__team {{pobedio(3)}}">
+									<td class="tournament-bracket__country">
+										<abbr class="tournament-bracket__code">{{s_takmicar3}}</abbr>
+										<span class="tournament-bracket__flag">
+											<img src="{{server}}/images/avatar/{{s_avatar3}}" class="avatar" [hidden]="!s_avatar3">
+										</span>
+									</td>
+									<td class="tournament-bracket__score {{prazno(s_skor3)}}">
+										<span class="tournament-bracket__number">{{s_skor3}}</span>
+									</td>
+								</tr>
+								<tr class="tournament-bracket__team {{pobedio(4)}}">
+									<td class="tournament-bracket__country">
+										<abbr class="tournament-bracket__code">{{s_takmicar4}}</abbr>
+										<span class="tournament-bracket__flag">
+											<img src="{{server}}/images/avatar/{{s_avatar4}}" class="avatar" [hidden]="!s_avatar4">
+										</span>
+									</td>
+									<td class="tournament-bracket__score {{prazno(s_skor4)}}">
+										<span class="tournament-bracket__number">{{s_skor4}}</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="tournament-bracket__round tournament-bracket__round--gold">
+			<h3 class="tournament-bracket__round-title">{{text._518}}</h3>
+			<ul class="tournament-bracket__list">
+				<li class="tournament-bracket__item">
+					<div [ngx-scroll-to]="'#destination'" (click)="izabraniMec(g_takmicar1, g_takmicar2, g_skor1, g_skor2, g_datum, g_id1, g_id2, g_avatar1, g_avatar2)" class="tournament-bracket__match tim"
+					 tabindex="0">
+						<table class="tournament-bracket__table">
+							<caption class="tournament-bracket__caption" style="text-align: center;">
+								<time [hidden]="g_skor1 == null">{{g_datum | date : 'medium'}}</time>
+							</caption>
+							<thead class="sr-only">
+								<tr>
+									<th>Country</th>
+									<th>Score</th>
+								</tr>
+							</thead>
+							<tbody class="tournament-bracket__content {{prazno(g_skor1)}}">
+								<tr class="tournament-bracket__team {{pobedio(11)}}">
+									<td class="tournament-bracket__country">
+										<abbr class="tournament-bracket__code">{{g_takmicar1}}</abbr>
+										<span class="tournament-bracket__flag">
+											<img src="{{server}}/images/avatar/{{g_avatar1}}" class="avatar" [hidden]="!g_avatar1">
+										</span>
+									</td>
+									<td class="tournament-bracket__score">
+										<span class="tournament-bracket__number">{{g_skor1}}</span>
+										<span class="tournament-bracket__medal tournament-bracket__medal--gold fa fa-trophy {{prazno(g_skor1)}}" aria-label="Gold medal"
+										 [hidden]="g_skor2 > g_skor1"></span>
+										<span class="tournament-bracket__medal tournament-bracket__medal--silver fa fa-trophy {{prazno(g_skor1)}}" aria-label="Silver medal"
+										 [hidden]="g_skor2 < g_skor1"></span>
+									</td>
+								</tr>
+								<tr class="tournament-bracket__team {{pobedio(12)}}">
+									<td class="tournament-bracket__country">
+										<abbr class="tournament-bracket__code">{{g_takmicar2}}</abbr>
+										<span class="tournament-bracket__flag">
+											<img src="{{server}}/images/avatar/{{g_avatar2}}" class="avatar" [hidden]="!g_avatar2">
+										</span>
+									</td>
+									<td class="tournament-bracket__score">
+										<span class="tournament-bracket__number">{{g_skor2}}</span>
+										<span class="tournament-bracket__medal tournament-bracket__medal--gold fa fa-trophy {{prazno(g_skor2)}}" aria-label="Gold medal"
+										 [hidden]="g_skor1 > g_skor2 || g_skor2 == undefined"></span>
+										<span class="tournament-bracket__medal tournament-bracket__medal--silver fa fa-trophy {{prazno(g_skor2)}}" aria-label="Silver medal"
+										 [hidden]="g_skor2 > g_skor1 || g_skor2 == undefined"></span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="tournament-bracket__round tournament-bracket__round--gold">
+			<h3 class="tournament-bracket__round-title">{{text._519}}</h3>
+			<ul class="tournament-bracket__list">
+				<li class="tournament-bracket__item">
+					<div class="tournament-bracket__match tim" tabindex="0">
+						<p style="text-align: center;">
+							<span class="tournament-bracket__medal tournament-bracket__medal--gold fa fa-trophy" aria-label="Gold medal"></span>
+							<b>{{pobednik()}}</b>
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div style="height: 100px;"></div>
+
+<div *ngIf="text" id="destination" class="glavni" [hidden]="!indikator">
+	<div class="container" style="width: 100%;padding: 0;">
+		<div class="row" style="padding-right: 20px;padding-left: 20px;padding-top: 10px;">
+
+			<div class="col-md-4" style="height: 200px;text-align: center;">
+				<img src="{{server}}/images/avatar/{{slika1}}" class="avatar" style="width:150px; height:150px" [hidden]="!g_avatar1">
+				<br><br>
+				<a class="linkDoProfila" routerLink="/{{aori}}/pregledKorisnika/{{id1}}">
+					<label style="font-size: 200%;">{{takmicar1}}</label>
+				</a>
+				<br><br>
+				<h5 style="font-weight:bold; text-align: center; color: rgb(47, 106, 184);">{{text._1002}}</h5>
+				<br><br>
+			</div>
+
+			<div class="col-md-4" style="height: 200px;text-align: center;padding-top: 100px;">
+					<label style="vertical-align: middle; text-align:center;font-size: 130%; font-style: italic;">{{datum | date : 'medium'}}</label><br/>
+				<h1>{{skor1}} : {{skor2}}</h1>
+			</div>
+
+			<div class="col-md-4" style="height: 200px;text-align: center;">
+				<img src="{{server}}/images/avatar/{{slika2}}" class="avatar" style="width:150px; height:150px" [hidden]="!g_avatar1">
+				<br><br>
+				<a class="linkDoProfila" routerLink="/{{aori}}/pregledKorisnika/{{id2}}">
+					<label style="font-size: 200%;">{{takmicar2}}</label>
+				</a>
+				<br><br>
+				<h5 style="font-weight:bold; text-align: center; color: rgb(180, 32, 32);">{{text._1003}}</h5>
+				<br><br>
+			</div>
+
+		</div>
+
+		<div class="row" style="padding-right: 20px;padding-left: 20px;">
+
+			<div class="col-md-4 botovi">
+					<table style="border-top: none;" class="table table-hover">
+						<thead style="font-size: 11px;">
+							<tr>
+								<th scope="col">{{ text._1000 }}</th>
+								<th scope="col">{{ text._1001 }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let i of igraci1">
+								<td>{{i.naziv_igraca}}</td><td>{{i.naziv_tipa_bota}}</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+
+			<div class="col-md-4">
+				
+			</div>
+
+			<div class="col-md-4 botovi">
+					<table style="border-top: none;" class="table table-hover">
+						<thead style="font-size: 11px;">
+							<tr>
+								<th scope="col">{{ text._1000 }}</th>
+								<th scope="col">{{ text._1001 }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let i of igraci2">
+								<td>{{i.naziv_igraca}}</td><td>{{i.naziv_tipa_bota}}</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+
+		</div>
+
+		<div style="width: 100%; height: 100%; text-align: center;" [hidden]="ProveraDatumaOdigravanja()">
+			<button style="width: 100%;" (click)="ZapocniMec()" type="button" class="btn btn-primary btn-lg btn-block">{{text._520}}</button>
+		</div>
+	</div>
+</div>

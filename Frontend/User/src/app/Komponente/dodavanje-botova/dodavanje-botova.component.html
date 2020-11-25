@@ -1,0 +1,74 @@
+<div class="container" *ngIf="text">
+    <div class="row">
+        <div class="col-lg-6">
+            <br>
+            <h3>{{text._47}}:</h3>
+            
+            <form (submit)="IzvrsiDodavanje()">
+                <div class="form-group" >
+                    <label for="tip_bota"><span style="color: red">*  </span>{{text._48}}</label>&nbsp;
+                    <span matTooltip="{{ text._1023 }}" [matTooltipPosition]="position"><img id='logo' src='../../../assets/images/tooltip.png' /></span><br>
+                    <select #izabranTipBota (change)="PostaviTipBota(izabranTipBota.value)" class="custom-select" style="max-width: 400px" disabled="{{nemaIzbora}}">
+                        <option *ngFor="let tip of tipoviBotova" [value]="tip.id_tipa_bota">
+                            {{ tip.naziv_tipa_bota | titlecase }}
+                        </option>
+                    </select>
+                   
+                </div>
+
+                <div class="form-group" (change)="ProveraFajlIgre()">
+                    <label for="bot"><span style="color: red">*  </span>{{text._49}}:</label>&nbsp;
+                    <span matTooltip="{{ text._1024 }}" [matTooltipPosition]="position"><img id='logo' src='../../../assets/images/tooltip.png' /></span><br>
+                    <input type="file" class="form-control file_input" accept=".c, .cpp, .zip, .rar, .cs, .py" id="bot" name="bot" (change)="OnFileSelected($event.target.files)" style="max-width: 300px"/>
+                    <label style="color: red">{{ proveraFajlIgre }}</label>
+                    <label style="color: red">{{ proveraMogucnostZamene }}</label>
+                </div>
+
+                <button id='dugme' type="submit" class="btn btn-primary btn-lg">{{text._50}}</button>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <br>
+            <h3 style="text-align: center;">{{text._51}}:</h3>
+            <div style="margin-top: 10px;" class="row">
+                <div class="col-lg-6">
+                    <span *ngIf="!moguceTestiranje" matTooltip="{{ text._1034 }}" [matTooltipPosition]="positionAbove">
+                        <button disabled type="button" class="btn btn-outline-primary wid"><i class="fa fas fa-bug"></i> {{ text._1031 }}</button>
+                    </span>
+                    <span *ngIf="moguceTestiranje" matTooltip="{{ text._1033 }}" [matTooltipPosition]="positionAbove">
+                        <button (click)="IzvrsiTestiranje()" type="button" class="btn btn-outline-primary wid"><i class="fa fas fa-bug"></i> {{ text._1031 }}</button>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <span *ngIf="!moguceBrisanje" matTooltip="{{ text._1036 }}" [matTooltipPosition]="position">
+                        <button disabled type="button" class="btn btn-outline-danger wid"><i class="far fa-trash-alt"></i> {{ text._1030 }}</button>
+                    </span>
+                    <span *ngIf="moguceBrisanje" matTooltip="{{ text._1032 }}" [matTooltipPosition]="position">
+                        <button (click)="IzvrsiBrisanje()" type="button" class="btn btn-outline-danger wid"><i class="far fa-trash-alt"></i> {{ text._1030 }}</button>
+                    </span>
+                </div>
+            </div>
+            <!--
+            <div style="text-align: right;">
+                <span matTooltip="{{text._78}}" [matTooltipPosition]="position">
+                    <img (click)="IzvrsiBrisanje()" class="kanta" src='../../../assets/images/kanta.png' />
+                </span>
+                &nbsp;&nbsp;
+            </div>
+            -->
+            <mat-selection-list [(ngModel)]="cekiraniBotovi" #botovi>
+                <mat-list-option (click)="PratiCekiranje($event)" style="color: black; margin-top: 12px;" *ngFor="let bot of postojeciBotovi" [value]="bot.id_bota">
+                    <span style="color:goldenrod; font-size: 18px;">{{ bot.putanja_do_fajla }}</span>  {{ bot.naziv_tipa_bota | titlecase }}
+                </mat-list-option>
+            </mat-selection-list>
+            
+            <br><br>
+            <h5 style="text-align: center; font-style: italic;">{{ nemaBotova }}</h5>
+        </div>
+    <div>
+</div>
+
+
+<div class="my-container">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>

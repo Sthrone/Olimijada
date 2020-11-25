@@ -1,0 +1,35 @@
+.example-sidenav
+{
+    -ms-overflow-style: none;
+/*   overflow: -moz-scrollbars-none;  */
+}
+
+.example-sidenav::-webkit-scrollbar 
+{
+    display: none;
+}
+
+mat-sidenav 
+{
+    width: 130px;
+    background-color: transparent;
+}
+
+mat-sidenav-content
+{
+    margin-top: 0px;
+    padding-left: 40px;
+}
+
+.example-container
+{
+    background-color: transparent;
+}
+
+@-moz-document url-prefix() 
+{
+    .example-sidenav 
+    { 
+        overflow: hidden; 
+    }
+}

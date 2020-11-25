@@ -1,0 +1,187 @@
+<div class="container" *ngIf="text">
+        <div class="row malodole">
+                <div class="col-lg-4">
+                    <h3>{{turnir.naziv_turnira | uppercase}}</h3>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+                <div class="col-lg-4">
+                    <h5>{{text._569}}:
+                        <br/>
+                        <span class="c">{{turnir.datum_odigravanja | date:'medium'}}</span>
+                    </h5>
+                </div>
+            </div>
+            <br/>
+            <br/>
+    <div class="row">
+        <div class="col-lg-12">
+            
+            
+            <h3>{{ text._1005 }}</h3>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">{{text._513}}</th>
+                        <th scope="col">{{text._6}}</th>
+                        <th scope="col">{{text._522}}</th>
+                        <th scope="col">{{text._524}}</th>
+                        <th scope="col">{{text._523}}</th>
+                        <th scope="col">{{text._514}}</th>
+                        <th scope="col">{{text._1004}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of tabela; index as in">
+                        <td class="vazno">{{in + 1}}.</td>
+                        <td style="font-size: 15px; font-weight: bold;color:#5f480e;">{{i.korisnicko_ime}}</td>
+                        <td>{{i.broj_pobeda}}</td>
+                        <td>{{i.broj_neresenih}}</td>
+                        <td>{{i.broj_poraza}}</td>
+                        <td style="font-size: 15px; font-weight: bold;">{{i.broj_bodova}}</td>
+                        <td style="text-align: left">
+                            <label *ngFor="let j of mecevi">
+                                
+                                <span *ngIf="i.id_korisnika==j.id_korisnika1 && j.ucinak1>j.ucinak2 && (j.ucinak1!=null || j.ucinak1!='')">
+                                        <button [ngx-scroll-to]="'#destination'" type="button" style="background-color: green; color: white;" mat-raised-button [matTooltipPosition]="position" matTooltip="{{j.korisnicko_ime1}}  {{j.ucinak1}} : {{j.ucinak2}}  {{j.korisnicko_ime2}}" (click)="PrikaziMec(j.id_meca)">{{text._526}}</button>
+                                </span>
+                                
+                                <span *ngIf="i.id_korisnika==j.id_korisnika2 && j.ucinak1<j.ucinak2 && (j.ucinak2!=null || j.ucinak2!='')">
+                                    <button [ngx-scroll-to]="'#destination'" type="button" style="background-color: green; color: white;" mat-raised-button [matTooltipPosition]="position" matTooltip="{{j.korisnicko_ime1}}  {{j.ucinak1}} : {{j.ucinak2}}  {{j.korisnicko_ime2}}" (click)="PrikaziMec(j.id_meca)">{{text._526}}</button>
+                                </span>
+                                <span *ngIf="(i.id_korisnika==j.id_korisnika1 && j.ucinak1<j.ucinak2 && (j.ucinak1!=null || j.ucinak1!='')) || (i.id_korisnika==j.id_korisnika2 && j.ucinak1>j.ucinak2 && (j.ucinak2!=null || j.ucinak2!=''))">
+                                    <button type="button" [ngx-scroll-to]="'#destination'" style="background-color: red; color: white; " mat-raised-button [matTooltipPosition]="position" matTooltip="{{j.korisnicko_ime1}}  {{j.ucinak1}} : {{j.ucinak2}}  {{j.korisnicko_ime2}}" (click)="PrikaziMec(j.id_meca)">{{text._528}}</button>
+                                </span>
+                                <span *ngIf="(i.id_korisnika==j.id_korisnika1 && j.ucinak1==j.ucinak2 && j.ucinak1 ) || (i.id_korisnika==j.id_korisnika2 && j.ucinak1==j.ucinak2 && j.ucinak2)">
+                                    <button type="button" [ngx-scroll-to]="'#destination'" style="background-color: #ffb600; color: white;" mat-raised-button [matTooltipPosition]="position" matTooltip="{{j.korisnicko_ime1}}  {{j.ucinak1}} : {{j.ucinak2}}  {{j.korisnicko_ime2}}" (click)="PrikaziMec(j.id_meca)">{{text._527}}</button>
+                                </span>
+
+                                <span *ngIf="(i.id_korisnika==j.id_korisnika1 && (j.ucinak1==null || j.ucinak1=='') && (j.ucinak2==null || j.ucinak2=='')) || (i.id_korisnika==j.id_korisnika2 && (j.ucinak1==null || j.ucinak1=='') &&  (j.ucinak2==null || j.ucinak2==''))">
+                                        <button type="button" [ngx-scroll-to]="'#destination'" style="background-color: gray; color: white;" mat-raised-button [matTooltipPosition]="position" matTooltip="{{j.korisnicko_ime1}}  {{j.ucinak1}} : {{j.ucinak2}}  {{j.korisnicko_ime2}}" (click)="PrikaziMec(j.id_meca)">?</button>
+                                </span>
+                            </label>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            
+              
+
+
+
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-lg-10">
+            <h3>{{ text._1006 }} <span matTooltip="{{ ttp }}" [matTooltipPosition]="position"><img id='logo' src='../../../assets/images/tooltip.png' /></span></h3>
+            <table class="table table-hover" id="tabelaMeceva">
+                <thead>
+                    <tr id="redTabeleMeceva">
+                        <th scope="col">{{text._529}}</th>
+                        <th scope="col">{{text._531}}</th>
+                        <th scope="col">{{text._530}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of mecevi | paginate: { itemsPerPage: tabela.length/2, currentPage: p }" (click)="PrikaziMec(i.id_meca)" [ngx-scroll-to]="'#destination'">
+                        <td width="35%">{{i.korisnicko_ime2}}</td>
+                        <td>{{i.ucinak2}} : {{i.ucinak1}}</td>
+                        <td width="35%">{{i.korisnicko_ime1}}</td>
+                        
+                        
+                    </tr>
+
+                </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event" 
+                                 style="text-align: center"
+                                 previousLabel="{{ text._1008 }}"
+                                 nextLabel="{{ text._1007 }}">
+            </pagination-controls>
+            
+
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row" *ngIf="pokaziDivMeca > 0" style="background-color: rgba(211, 211, 211, 0.479);padding-top: 15px;" id="destination">
+    
+            
+        <div class="col-lg-5" style="text-align: center;">
+            <img src="{{server}}/images/avatar/{{mec.avatar2}}" alt="" width="150px" height="150px"> <br/>
+            <a class="linkDoProfila" routerLink="/{{aori}}/pregledKorisnika/{{mec.id_korisnika2}}">
+                <label style="font-size: 200%;">{{mec.korisnicko_ime2}}</label>
+            </a>
+            
+        </div>
+        <div class="col-lg-2" style="text-align: center;">
+            <br/><br/>
+                <label style="vertical-align: middle; text-align:center;font-size: 100%; font-style: italic;">{{mec.vreme_pocetka | date : 'medium'}}</label><br/>
+            <label style="font-weight: bold; vertical-align: middle; text-align:center;font-size: 200%">{{mec.ucinak2}} : {{mec.ucinak1}} </label>
+        </div>
+        
+        <div class="col-lg-5" style="text-align: center;">
+            <img src="{{server}}/images/avatar/{{mec.avatar1}}" alt="" width="150px" height="150px"><br/>
+            <a class="linkDoProfila" routerLink="/{{aori}}/pregledKorisnika/{{mec.id_korisnika1}}">
+                <label style="font-size: 200%;">{{mec.korisnicko_ime1}}</label>
+            </a>
+            
+        </div>
+        <br/>
+        <div class="col-md-5" style="text-align: left;">
+            <h5 style="font-weight:bold; text-align: center; color: rgb(180, 32, 32);">{{text._1003}}</h5>
+        
+            <table style="border-top: none;" class="table table-hover">
+                <thead style="font-size: 11px;">
+                    <tr>
+                        <th scope="col">{{ text._1000 }}</th>
+                        <th scope="col">{{ text._1001 }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of igraci2">
+                        <td>{{i.naziv_igraca}}</td><td>{{i.naziv_tipa_bota}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+                
+                
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-5" style="text-align: left;">
+                    <h5 style="font-weight:bold; text-align: center; color: rgb(47, 106, 184);">{{text._1002}}</h5>
+                    
+                    <table style="border-top: none;" class="table table-hover">
+                        <thead style="font-size: 11px;">
+                            <tr>
+                                <th scope="col">{{ text._1000 }}</th>
+                                <th scope="col">{{ text._1001 }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let i of igraci1">
+                                <td>{{i.naziv_igraca}}</td><td>{{i.naziv_tipa_bota}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    
+                </div>
+               
+    
+            
+  
+        <div style="width: 100%; height: 100%; text-align: center;" [hidden]="mec.ucinak1==null || mec.ucinak2==null">
+			<button (click)="ZapocniMec()" type="button" class="btn btn-primary btn-lg btn-block" >{{text._520}}</button>
+		</div>
+
+    </div>
+        
+
+</div>

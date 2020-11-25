@@ -1,0 +1,361 @@
+<!--<div class="container" *ngIf='text'>
+    <div class="row">
+
+        <div class="col-lg-6">
+            <div class="row">
+                <div class=" col-lg-12">
+                    <br/>
+                    <br/>
+                    <h2>{{turnir.naziv_turnira | uppercase}}</h2>
+                    <br/>
+                    <h5>{{text._147}}:
+                        <br/>
+                        <span class="c">{{turnir.datum_kraja_prijave | date:'fullDate'}}</span>
+                    </h5>
+                    <br/>
+                    <h5>{{text._148}}:
+                        <br/>
+                        <span class="c">{{turnir.datum_odigravanja | date:'fullDate'}}</span>
+                    </h5>
+                    <br/>
+                    <br/>
+                    <button style="margin-left: 5%;" type="button" class="btn btn-primary btn-lg" [hidden]="daLiJePrijavljen" (click)="obrisiKorisnika(korisnik.id_korisnika)">Odustani</button>
+                    <div [hidden]="!daLiJePrijavljen">
+                        <form>
+
+                            <mat-form-field class="example-full-width" (change)=ProveraNazivaIgraca() style="width: 80%">
+                                <input matInput placeholder="{{text._85}}" [(ngModel)]="nazivIgraca" type="text" name="nazivIgraca">
+
+                                <mat-error *ngIf="proveraKorisnickogImena!=''">
+                                    {{proveraKorisnickogImena}}
+                                </mat-error>
+
+                            </mat-form-field>
+                            <span *ngIf="proveraNazivaIgraca!=''" matTooltip="{{proveraNazivaIgraca}}" [matTooltipPosition]="position">
+                                <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                            </span>
+
+                            <br>
+                            
+          
+                            <br/>
+
+                            <mat-radio-group class="example-radio-group" name="radio" [(ngModel)]="cekiraniBot" #botovi>
+                                <mat-radio-button style="color: black; margin-top: 12px;" *ngFor="let bot of postojeciBotovi" [value]="bot.id_bota">
+                                    <span style="color:goldenrod; font-size: 18px;">{{ bot.putanja_do_fajla }}</span> {{ bot.naziv_tipa_bota | titlecase }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+
+
+                            <div id="dodajBota" (click)=DodajBota() *ngIf='prikazivanjeDivaZaDodaj==0'>
+                                <label style="margin: auto">{{text._87}}</label>
+                            </div>
+                            <br/>
+                            <div id='dodavanjeBota' *ngIf='prikazivanjeDivaZaDodaj!=0'>
+
+                                <form (submit)="IzvrsiDodavanje()">
+                                    <div class="form-group">
+                                        <label for="tip_bota">
+                                            <span style="color: red">* </span>{{text._48}}</label>&nbsp;
+                                        <span matTooltip="{{ ttp_01 }}" [matTooltipPosition]="position">
+                                            <img id='logo' src='../../../assets/images/tooltip.png' />
+                                        </span>
+                                        <br>
+                                        <select #izabranTipBota (change)="PostaviTipBota(izabranTipBota.value)" class="custom-select" style="max-width: 400px" disabled="{{nemaIzbora}}">
+                                            <option *ngFor="let tip of tipoviBotova" [value]="tip.id_tipa_bota">
+                                                {{ tip.naziv_tipa_bota | titlecase }}
+                                            </option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-group" (change)="ProveraFajlIgre()">
+                                        <label for="bot">
+                                            <span style="color: red">* </span>{{text._49}}</label>&nbsp;
+                                        <span matTooltip="{{ ttp_02 }}" [matTooltipPosition]="position">
+                                            <img id='logo' src='../../../assets/images/tooltip.png' />
+                                        </span>
+                                        <br>
+                                        <input type="file" class="form-control file_input" accept=".c, .cpp, .zip, .rar, .cs, .py" id="bot" name="bot" (change)="OnFileSelected($event.target.files)"
+                                            style="max-width: 300px" />
+                                        <label style="color: red">{{ proveraFajlIgre }}</label>
+                                        <label style="color: red">{{ proveraMogucnostZamene }}</label>
+                                    </div>
+
+                                    <button id='dugme' type="submit" class="btn btn-primary btn-lg">{{text._50}}</button>
+                                    <button type="button" class="btn btn-primary btn-lg" (click)="ZatvoriDodajBota()">{{text._88}}</button>
+                                </form>
+
+
+
+                            </div>
+
+
+                            <br/>
+                            <button type="button" class="btn btn-primary btn-lg" *ngIf="daLiMozeDaDoda==0" (click)="DodajIgraca()">{{text._505}}</button>
+                            <button type="button" class="btn btn-primary btn-lg" disabled *ngIf="daLiMozeDaDoda!=0">{{text._505}}</button>
+                            <label *ngIf="daLiMozeDaDoda>0" style="color:red">{{text._90}}</label>
+
+                        </form>
+
+
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <br/>
+                            <br>
+                            <p>{{text._507}}{{igraciKorisnika.length}}/{{igra.broj_igraca}}</p>
+                            <br/>
+                            <br>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">{{text._509}}</th>
+                                        <th scope="col">{{text._37}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let i of igraciKorisnika">
+                                        <td>{{i.naziv_igraca}}</td>
+                                        <td>{{i.putanja_do_fajla}} - {{i.naziv_tipa_bota}}</td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <button type="button" class="btn btn-primary btn-lg" (click)="PrijaviSeNaTurnir()" *ngIf='igraciKorisnika.length==igra.broj_igraca && korisnici.length<turnir.broj_ucesnika'>{{text._506}}</button>
+                            <button type="button" class="btn btn-primary btn-lg" disabled *ngIf='igraciKorisnika.length!=igra.broj_igraca || korisnici.length==turnir.broj_ucesnika'>{{text._506}}</button>
+
+                            <br/>
+                            <label *ngIf='daLiMozeDaSePrijavi!=""' tyle="color:red">{{daLiMozeDaSePrijavi}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <br/>
+                <br/>
+
+                <h4>{{text._542}}</h4>
+                <br/>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{text._6}}</th>
+                            <th scope="col">{{text._91}}</th>
+                            <th scope="col">{{text._33}}</th>
+                            <th scope="col">{{text._30}}</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let igrac of korisnici">
+                            <td>{{igrac.korisnicko_ime}}</td>
+                            <td>{{igrac.drzava}}</td>
+                            <td>{{igrac.organizacija}}</td>
+                            <td>{{igrac.rejting}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>-->
+
+
+<div class="container" *ngIf="text">
+    <div class="row malodole">
+        <div class="col-lg-4">
+            <h3>{{turnir.naziv_turnira | uppercase}}</h3>
+        </div>
+        <div class="col-lg-4">
+            <h5>{{text._147}}:
+                <br/>
+                <span class="c">{{turnir.datum_kraja_prijave | date:'medium'}}</span>
+            </h5>
+        </div>
+        <div class="col-lg-4">
+            <h5>{{text._148}}:
+                <br/>
+                <span class="c">{{turnir.datum_odigravanja | date:'medium'}}</span>
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <br/>
+            <br/>
+            <div [hidden]="daLiJePrijavljen">
+                <label style="color:red;">{{text._544}}</label>
+                <br/>
+                <button style="margin-left: 5%;background-color: #82252a" type="button" class="btn btn-primary btn-lg" (click)="obrisiKorisnika(korisnik.id_korisnika)">{{text._543}}</button>
+            </div>
+
+            <div [hidden]="!daLiJePrijavljen">
+                <form>
+
+                    <h4>{{ text._1043 }}</h4>
+                    <br>
+                    <mat-form-field class="example-full-width" (change)=ProveraNazivaIgraca() style="width: 80%">
+                        <input matInput placeholder="{{text._85}}" [(ngModel)]="nazivIgraca" type="text" name="nazivIgraca">
+
+                        <mat-error *ngIf="proveraKorisnickogImena!=''">
+                            {{proveraKorisnickogImena}}
+                        </mat-error>
+                    </mat-form-field>
+                    <span *ngIf="proveraNazivaIgraca!=''" matTooltip="{{proveraNazivaIgraca}}" [matTooltipPosition]="position">
+                        <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                    </span>
+
+                    <br>
+
+
+                    <br/>
+
+                    <mat-radio-group class="example-radio-group" name="radio" [(ngModel)]="cekiraniBot" #botovi>
+                        <mat-radio-button style="color: black; margin-top: 12px;" *ngFor="let bot of postojeciBotovi" [value]="bot.id_bota">
+                            <span style="color:goldenrod; font-size: 18px;">{{ bot.putanja_do_fajla }}</span> - {{ bot.naziv_tipa_bota | titlecase }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+
+
+                    <div id="dodajBota" (click)=DodajBota() *ngIf='prikazivanjeDivaZaDodaj==0'>
+                        <label style="margin: auto">{{text._87}}</label>
+                    </div>
+                    <br/>
+                    <div id='dodavanjeBota' *ngIf='prikazivanjeDivaZaDodaj!=0'>
+
+                        <form (submit)="IzvrsiDodavanje()">
+                            <div class="form-group">
+                                <label for="tip_bota">
+                                    <span style="color: red">* </span>{{text._48}}</label>&nbsp;
+                                <span matTooltip="{{ ttp_01 }}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/tooltip.png' />
+                                </span>
+                                <br>
+                                <select #izabranTipBota (change)="PostaviTipBota(izabranTipBota.value)" class="custom-select" style="max-width: 400px" disabled="{{nemaIzbora}}">
+                                    <option *ngFor="let tip of tipoviBotova" [value]="tip.id_tipa_bota">
+                                        {{ tip.naziv_tipa_bota | titlecase }}
+                                    </option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group" (change)="ProveraFajlIgre()">
+                                <label for="bot">
+                                    <span style="color: red">* </span>{{text._49}}</label>&nbsp;
+                                <span matTooltip="{{ ttp_02 }}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/tooltip.png' />
+                                </span>
+                                <br>
+                                <input type="file" class="form-control file_input" accept=".c, .cpp, .zip, .rar, .cs, .py" id="bot" name="bot" (change)="OnFileSelected($event.target.files)"
+                                    style="max-width: 300px" />
+                                <label style="color: red">{{ proveraFajlIgre }}</label>
+                                <label style="color: red">{{ proveraMogucnostZamene }}</label>
+                            </div>
+
+                            <button id='dugme' type="submit" class="btn btn-primary btn-lg">{{text._50}}</button>
+                            <button type="button" class="btn btn-primary btn-lg" (click)="ZatvoriDodajBota()">{{text._88}}</button>
+                        </form>
+
+
+
+                    </div>
+
+
+                    <br/>
+                    <div class="row">
+
+
+                        <button type="button" style="width: 50%;" class="btn btn-success" [disabled]="nazivIgraca=='' || cekiraniBot==null || (nazivIgraca.length<3 || nazivIgraca.length>10) || igraciKorisnika.length==this.igra.broj_igraca"
+                            (click)="DodajIgraca()">{{text._505}}</button>
+                        <br>
+                        <p *ngIf="igraciKorisnika.length==igra.broj_igraca" style="color:rgb(68, 175, 101)">{{text._90}}</p>
+                    </div>
+                </form>
+
+                <br/>
+                <div class="row">
+                    <br/>
+                    <br>
+                    <div class="col-lg-12">
+                        <div class="row" style="display: block">
+                            <p style="font-size: 110%;display: block">{{text._507}}{{igraciKorisnika.length}}/{{igra.broj_igraca}}</p>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <table class="table table-hover; let j = index" [hidden]="igraciKorisnika.length==0" style="display: block">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">{{text._509}}</th>
+                                        <th scope="col">{{text._1044}}</th>
+                                        <th scope="col">
+
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let i of igraciKorisnika">
+                                        <td>{{i.naziv_igraca}}</td>
+                                        <td>{{i.putanja_do_fajla}} - {{i.naziv_tipa_bota}}</td>
+                                        <td>
+                                            <img src="../../../assets/images/x.png" matTooltip="{{text._554}}" [matTooltipPosition]="position" (click)="IzbaciIgracaIzNiza(j)">
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <button type="button" style="display: block" class="btn btn-primary btn-lg" (click)="PrijaviSeNaTurnir()" *ngIf='igraciKorisnika.length==igra.broj_igraca && korisnici.length<turnir.broj_ucesnika'>{{text._506}}</button>
+                            <br/>
+                            <button type="button" style="display: block" class="btn btn-primary btn-lg" disabled *ngIf='igraciKorisnika.length!=igra.broj_igraca || korisnici.length==turnir.broj_ucesnika'
+                                matTooltip="{{text._555}}" [matTooltipPosition]="position">{{text._506}}</button>
+
+                            <br/>
+                            <label *ngIf='daLiMozeDaSePrijavi!=""' tyle="color:red">{{daLiMozeDaSePrijavi}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <br/>
+            <br/>
+            <h4>{{text._542}}</h4>
+            <div [hidden]="korisnici.length!=0">
+                <br>
+                <p style="font-style: italic;">{{text._545}}</p>
+            </div>
+            <div [hidden]="korisnici.length==0">
+                <br/>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">{{text._6}}</th>
+                            <th scope="col">{{text._91}}</th>
+                            <th scope="col">{{text._33}}</th>
+                            <th scope="col">{{text._30}}</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let igrac of korisnici">
+                            <td>{{igrac.korisnicko_ime}}</td>
+                            <td>{{igrac.drzava}}</td>
+                            <td>{{igrac.organizacija}}</td>
+                            <td>{{igrac.rejting}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

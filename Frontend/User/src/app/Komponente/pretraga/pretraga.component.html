@@ -1,0 +1,41 @@
+<button *ngIf="dugmeTekst" id="dugmence" type="button" (click)="ToggleSearch()" class="btn btn-secondary">{{ dugmeTekst }}</button>
+<div id="pretraga" *ngIf="text && prozorPrikazan">
+  <div class="row">
+    <div class="form-group col-md-3">
+      <label>{{ text._1078 }}:</label>
+      <input name="korisnicko_ime" [(ngModel)]="username" (keyup)="Filtriraj()" class="form-control mr-sm-2" type="text" placeholder="{{ text._1078 }}"><br>
+    </div>
+    <div class="form-group col-md-3">
+      <label>{{ text._1079 }}:</label>
+      <input name="email" [(ngModel)]="email" (keyup)="Filtriraj()" class="form-control mr-sm-2" type="text" placeholder="{{ text._1079 }}"><br>
+    </div>
+    <div class="form-group col-md-3">
+      <label>{{ text._1080 }}:</label>
+      <ng-select name="tip_korisnika" [items]="types" bindLabel="item" bindValue="item" (change)="Filtriraj()" 
+              placeholder="{{ text._1080 }}" [(ngModel)]="type">
+      </ng-select>
+    </div>
+    <div class="form-group col-md-3">
+      <label>{{ text._1081 }}:</label>
+      <ng-select name="drzava" [items]="countries" bindLabel="item" bindValue="item" (change)="Filtriraj()" 
+              placeholder="{{ text._1081 }}" [(ngModel)]="country"> 
+      </ng-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="form-group col-md-4">
+      <label>{{ text._1082 }}:</label>
+      <input name="organizacija" [(ngModel)]="organisation" (keyup)="Filtriraj()" class="form-control mr-sm-2" type="text" placeholder="{{ text._1082 }}"><br>
+    </div>
+    <div class="form-group col-md-2">
+      <label>{{ text._1083 }}:</label>
+      <input name="rejtingmin" [(ngModel)]="minRating" (keyup)="Filtriraj()" class="form-control mr-sm-2" type="number" placeholder="{{ text._1083 }}"><br>
+    </div>
+    <div class="form-group col-md-2">
+      <label>{{ text._1084 }}:</label>
+      <input name="rejtingmax" [(ngModel)]="maxRating" (keyup)="Filtriraj()" class="form-control mr-sm-2" type="number" placeholder="{{ text._1084 }}"><br>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>

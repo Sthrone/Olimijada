@@ -1,0 +1,16 @@
+ol.c {
+    list-style-type: upper-roman;
+    font-size: 125%;
+    padding-left: 10%;
+}
+
+.faq {
+	counter-reset: my-badass-counter;
+}
+.faq li:before {
+	content: counter(my-badass-counter);
+	counter-increment: my-badass-counter;
+}
+tr{
+    cursor: pointer;
+}

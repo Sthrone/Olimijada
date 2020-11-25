@@ -1,0 +1,13 @@
+<div *ngIf="igre && text">
+    <button *ngIf="admin" type="button" class="btn btn-success dodaj" [routerLink]="['/admin/dodajIgru']">{{text._111}}</button>
+    <input [(ngModel)]="term" (keyup)="Filtriraj()" class="form-control mr-sm-2" type="text" placeholder="{{text._79}}"><br>
+    <div *ngFor="let i of prikazaneIgre" (click)="IzaberiIgru(i)" [ngClass]="{'active': izabranaIgra == i }" class="card border-secondary mb-3" style="max-width: 20rem;">
+        <div style="text-align: center;" class="card-header"><p style="color: black">{{i.naziv_igre | titlecase}}</p></div>
+        <div class="card-body">
+            <p style="text-align: center"><img  src="{{server}}/images/slike_igara/{{i.slika_igre}}" alt="{{i.naziv_igre}}" class="sidenav-slika"></p>
+        </div>
+    </div>
+    <div [hidden]="prikazaneIgre.length != 0">
+        <p style="font-style: italic; text-align: center;"><i>{{ text._1076 }}</i></p>
+    </div>
+</div>

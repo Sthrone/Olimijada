@@ -1,0 +1,191 @@
+.btn
+{
+    margin-right: 15px;
+}
+
+/*
+#admin_portal
+{
+    font-weight: bold;
+    color: rgb(255, 255, 255); 
+    font-size: 19px;
+    border: 1px solid rgb(132, 136, 146);
+}
+*/
+
+.navbar
+{
+    background-color: #000000 !important;
+}
+
+.btn-primary
+{
+    background-color: black;
+    border-color: black;
+}
+
+.btn-primary:hover
+{
+    background-color: black;
+    color: #008cba;
+    border-bottom: 1px solid #008cba;
+}
+
+
+/*
+.navbar
+{
+    background-color: #494a4a !important;
+}
+
+.btn-primary
+{
+    background-color: #555a61;
+    border-color: #323538;
+}
+
+.btn-primary:hover
+{
+    background-color: #323538;
+    color: greenyellow;
+}
+*/
+
+/* Dropdown */
+
+.dropdown  
+{
+    margin-left: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+.dropdown-menu 
+{
+    position: absolute;
+    display: none;
+    opacity: 0;
+    list-style-type: none;
+    background-color: black;
+    border-radius: 4px;
+    transition: .2s all ease-in;
+    left: -40px;
+    text-align: center;
+}
+  
+.dropdown-menu li 
+{
+    padding: .5rem .5rem;
+}
+
+.dropdown-menu li + li 
+{
+    border-top: 1px solid #e1e1e1;
+}
+
+.dropdown-menu li > button
+{
+    margin-bottom: 2.5px;
+    border-radius: 4px;
+    transition: .2s background-color ease-in;
+}
+
+.dropdown-menu li > a:hover 
+{
+    background-color: #e9e9e9;
+}
+
+.dropdown.open .dropdown-menu 
+{
+    display: block;
+    opacity: 1;
+    margin-top: 0;
+}
+
+a.neat 
+{
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/*  --- JEZICI --- */
+
+.navig
+{
+    padding-left: 70px;
+}
+
+.jezik_dropdown  
+{
+    position: relative;
+    top: 1.8%;
+    right: 0.5%;
+    z-index: 10000;
+    width: 100px;
+    padding-left: -100px;
+}
+  
+.jezik_dropdown-menu 
+{
+    position: absolute;
+    display: none;
+    opacity: 0;
+    list-style-type: none;
+    background-color: black;
+    border-radius: 4px;
+    transition: .2s all ease-in;
+    right: 0;
+    text-align: left;
+}
+  
+.jezik_dropdown-menu li 
+{
+    padding: .5rem .8rem;
+}
+
+.jezik_dropdown-menu li + li 
+{
+    border-top: 1px solid #e1e1e1;
+}
+
+.jezik_dropdown-menu li > button
+{
+    display: block;
+    border-radius: 4px;
+    transition: .2s background-color ease-in;
+}
+
+.jezik_dropdown-menu li > a:hover 
+{
+    background-color: #e9e9e9;
+}
+
+.jezik_dropdown.open .jezik_dropdown-menu 
+{
+    display: block;
+    opacity: 1;
+    margin-top: 0;
+}
+
+.jezik_btn
+{
+    background-color: black;
+    border-color: black;
+    margin-bottom: 2px;
+}
+
+.jezik_btn:hover
+{
+    background-color: black;
+    color: #008cba;
+    border-bottom: 1px solid #008cba;
+}
+
+.jezik
+{
+    color: white;
+    font-size: 16px;
+}

@@ -1,0 +1,9 @@
+.full-width 
+{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 60px;
+    z-index: 500;
+    background-color: black;
+}

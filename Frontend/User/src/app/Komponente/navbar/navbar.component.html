@@ -1,0 +1,24 @@
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary" *ngIf="nav.navbar && text">
+    <div class="container navig">
+      <a [routerLink]="['/']" class="navbar-brand"><h4><img style="width: 50px;" id='olimijada' src='../../../assets/images/olimijada.gif'>&nbsp;Olimijada</h4></a>
+      <div class="btn-group btn-group-lg">
+          <button type="button" class="btn btn-primary {{mozeLiKliknuti}}" [routerLink]="['/']" >{{ text._2 }}</button>
+          <button type="button" class="btn btn-primary {{mozeLiKliknuti}}" [routerLink]="['/igre']">{{ text._3 }}</button>
+          <button type="button" class="btn btn-primary {{mozeLiKliknuti}}" (click)="otvoriPrijavu()" >{{ text._4 }}</button>
+          <button type="button" class="btn btn-primary {{mozeLiKliknuti}}" [routerLink]="['/registracija']">{{ text._5 }}</button>
+      </div>
+    </div>
+
+    <div class="jezik_dropdown" dropdown style="cursor: pointer;">
+      <h5 class="jezik_dropdown-toggle" dropdownToggle>
+        <img src="./assets/images/{{selectedLanguage}}.png" alt="Selected language" width="32px" height="32px;" style="border-radius: 40%;">
+        <span class="jezik">{{ selectedLanguage }}</span>
+      </h5>
+      <ul class="jezik_dropdown-menu" dropdownMenu>
+        <li>
+            <button (click)="ChooseLanguage('en')" type="button" class="btn btn-primary jezik_btn">{{ en }}</button>
+            <button (click)="ChooseLanguage('srb')" type="button" class="btn btn-primary jezik_btn">{{ srb }}</button>
+        </li>
+      </ul>
+    </div>
+</div>

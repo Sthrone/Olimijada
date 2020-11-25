@@ -1,0 +1,36 @@
+<div *ngIf="text">
+  <h1 style="text-align: center" mat-dialog-title>{{text._1521}}{{ime}} <span matTooltip={{text._1524}} [matTooltipPosition]="position"><img id='logo' src='../../../../assets/images/tooltip.png'></span></h1>
+  <hr>
+  <mat-dialog-content>
+      
+  </mat-dialog-content>
+  <mat-dialog-actions> 
+
+    <div class=container-fluid>
+      <div class="row">
+
+        <br>
+        <br>
+          <div class="col-md-6">
+            <mat-radio-group [(ngModel)]="selected">
+              <mat-radio-button  [checked]="selected === 'admin'" style="padding-right: 25px;" value="admin"><b>Admin</b></mat-radio-button>
+              <mat-radio-button [hidden]="tip_korisnika === 2" value="user">User</mat-radio-button>
+              <mat-radio-button [hidden]="tip_korisnika === 3" value="moderator">Moderator</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <div class="col-md-6" style="text-align: center">
+            <br>
+            <button (click)="dodajPravo()" class="btn btn-primary btn-lg" type="submit" [mat-dialog-close]="true">{{text._1525}}</button>
+          </div>
+
+      </div>
+      <br><br>
+    </div>
+
+    <div [hidden]="">
+
+    </div>
+
+  </mat-dialog-actions>  
+</div>

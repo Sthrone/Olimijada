@@ -1,0 +1,259 @@
+<div class="container" *ngIf="igra && text">
+  <div class="row">
+    <div clas="col-lg-12">
+      <br/>
+      <h2><span style="color: #f1c605;">&nbsp;&nbsp;{{igra.naziv_igre}}</span>{{text._52}}:</h2>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col-lg-1">
+
+    </div>
+    <div class="col-lg-11">
+      <br/>
+      <br/>
+
+      <mat-form-field>
+        <mat-select placeholder="{{text._53}}" [(value)]="selektovanaVrednost" [(ngModel)]="selektovano">
+          <mat-option *ngFor="let stanje_turnira of stanja_turnira" [value]="stanje_turnira.value">
+            {{ stanje_turnira.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;&nbsp;
+      <span *ngIf="selektovano == 'svi'" matTooltip="{{ ttp0 }}" [matTooltipPosition]="position"><img id='logo' src='../../../assets/images/tooltip.png' /></span>
+      <span *ngIf="selektovano == 'pending'" matTooltip="{{ ttp1 }}" [matTooltipPosition]="position"><img id='logo' src='../../../assets/images/tooltip.png' /></span>
+      <span *ngIf="selektovano == 'novi'" matTooltip="{{ ttp2 }}" [matTooltipPosition]="position"><img id='logo' src='../../../assets/images/tooltip.png' /></span>
+      <span *ngIf="selektovano == 'uToku'" matTooltip="{{ ttp3 }}" [matTooltipPosition]="position"><img id='logo' src='../../../assets/images/tooltip.png' /></span>
+      <span *ngIf="selektovano == 'zavrseni'" matTooltip="{{ ttp4 }}" [matTooltipPosition]="position"><img id='logo' src='../../../assets/images/tooltip.png' /></span>
+      <br>
+  
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <div class="row">
+    <div class="col-md-12">
+
+        <div *ngIf="selektovano=='zavrseni' && text">
+            <div [hidden]="zavrseniTurniri.length!=0">
+                <label class="nemaTurnira" style="font-size: 120%">{{text._556}}</label>
+              </div>
+            <div class="prikaz" *ngFor='let zavrseni of zavrseniTurniri'>
+              <div *ngIf='zavrseni.naziv_tipa_turnira=="Cup"' class="slika">
+                <img src="{{server}}/images/slike_za_kup_i_ligu/zakup.jpg" width="100px" height="90px">
+              </div>
+              <div *ngIf='zavrseni.naziv_tipa_turnira=="League"' class="slika">
+                  <img src="{{server}}/images/slike_za_kup_i_ligu/zaligu.jpg" width="100px" height="90px">
+              </div>  
+      
+                <span class="nazivTura"> {{zavrseni.naziv_turnira}} </span><br>
+                <p class="prazanRed"> </p>
+                <table>
+                    <tr>
+                      <td>{{zavrseni.naziv_tipa_turnira}}</td>
+                      <td>{{text._205}}: {{zavrseni.datum_odigravanja | date: 'short'}}</td>
+                      <td>{{zavrseni.broj_ucesnika}} {{text._46}}</td>
+                      <td><button type="button" class="btn btn-primary" (click)="ManageFinished(zavrseni)">{{text._59}}</button></td>
+                    </tr>
+                </table> 
+                <hr>
+                <br>
+              </div>
+            
+           </div>
+
+    <!--U samim tabelama prikazati redom: naziv turnira, naziv igre, tip turnira, broj ucesnika i stanje turnira.-->
+    <div *ngIf="selektovano=='novi' && text">
+        <div [hidden]="noviTurniri.length!=0">
+            <label class="nemaTurnira" style="font-size: 120%" >{{text._556}}</label>
+          </div>
+        <div class="prikaz" *ngFor='let novi of noviTurniri'>
+            
+            <div *ngIf='novi.naziv_tipa_turnira=="Cup"' class="slika">
+              <img src="{{server}}/images/slike_za_kup_i_ligu/zakup.jpg" width="100px" height="90px">
+            </div>
+            <div *ngIf='novi.naziv_tipa_turnira=="League"' class="slika">
+                <img src="{{server}}/images/slike_za_kup_i_ligu/zaligu.jpg" width="100px" height="90px">
+            </div>  
+            <span class="nazivTura"> {{novi.naziv_turnira}} </span><br>
+                <p class="prazanRed"> </p>
+            <table>
+                <tr>
+                  <td>{{novi.naziv_tipa_turnira}}</td>
+                  <td>{{text._207}}: {{novi.datum_kraja_prijave | date: 'short'}}</td>
+                  <td *ngIf="novi.broj_prijavljenih < novi.broj_ucesnika"><span class="ima_mesta">{{novi.broj_prijavljenih}} / {{novi.broj_ucesnika}} {{text._46}}</span></td>
+                  <td *ngIf="novi.broj_prijavljenih == novi.broj_ucesnika"><span class="nema_mesta">{{novi.broj_prijavljenih}} / {{novi.broj_ucesnika}} {{text._46}}</span></td>
+                  <td><button type="button" class="btn btn-primary" (click)="SelektujTurnir(novi)">{{text._163}}</button></td>
+                </tr>
+            </table> 
+              <hr>
+              <br>
+        </div>
+    </div>
+
+    <div *ngIf="selektovano=='uToku' && text">
+        <div [hidden]="uTokuTurniri.length!=0">
+            <label class="nemaTurnira" style="font-size: 120%">{{text._556}}</label>
+          </div>
+        <div class="prikaz" *ngFor='let uTokuT of uTokuTurniri'>
+            <div *ngIf='uTokuT.naziv_tipa_turnira=="Cup"' class="slika">
+              <img src="{{server}}/images/slike_za_kup_i_ligu/zakup.jpg" width="100px" height="90px">
+            </div>
+            <div *ngIf='uTokuT.naziv_tipa_turnira=="League"' class="slika">
+                <img src="{{server}}/images/slike_za_kup_i_ligu/zaligu.jpg" width="100px" height="90px">
+            </div>  
+    
+              <span class="nazivTura"> {{uTokuT.naziv_turnira}} </span><br>
+              <p class="prazanRed"> </p>
+              <table>
+                  <tr>
+                    <td>{{uTokuT.naziv_tipa_turnira}}</td>
+                    <td>{{text._205}}: {{uTokuT.datum_odigravanja | date: 'short'}}</td>
+                    <td>{{uTokuT.broj_ucesnika}} {{text._46}}</td>
+                    <td><button type="button" class="btn btn-primary" (click)="ManageFinished(uTokuT)">{{text._59}}</button></td>
+                  </tr>
+              </table>
+              <hr>
+              <br>
+        </div>
+    </div>
+
+
+    <div *ngIf="selektovano=='svi'">
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <b>{{text._60}}</b>&nbsp;{{text._61}}
+            </mat-expansion-panel-header>
+          
+            <ng-template matExpansionPanelContent>
+                <div [hidden]="noviTurniri.length!=0">
+                    <label class="nemaTurnira" style="font-size: 100%">{{text._556}}</label>
+                  </div>  
+              <div class="prikaz" *ngFor='let novi of noviTurniri'>
+                    
+                    <div *ngIf='novi.naziv_tipa_turnira=="Cup"' class="slika">
+                      <img src="{{server}}/images/slike_za_kup_i_ligu/zakup.jpg" width="100px" height="90px">
+                    </div>
+                    <div *ngIf='novi.naziv_tipa_turnira=="League"' class="slika">
+                        <img src="{{server}}/images/slike_za_kup_i_ligu/zaligu.jpg" width="100px" height="90px">
+                    </div>  
+            
+                      <span class="nazivTura"> {{novi.naziv_turnira}} </span><br>
+                      <p class="prazanRed"> </p>
+                      <table>
+                          <tr>
+                            <td>{{novi.naziv_tipa_turnira}}</td>
+                            <td>{{text._207}}: {{novi.datum_kraja_prijave | date: 'short'}}</td>
+                            <td *ngIf="novi.broj_prijavljenih < novi.broj_ucesnika"><span class="ima_mesta">{{novi.broj_prijavljenih}} / {{novi.broj_ucesnika}} {{text._46}}</span></td>
+                            <td *ngIf="novi.broj_prijavljenih == novi.broj_ucesnika"><span class="nema_mesta">{{novi.broj_prijavljenih}} / {{novi.broj_ucesnika}} {{text._46}}</span></td>
+                            <td><button type="button" class="btn btn-primary" (click)="SelektujTurnir(novi)">{{text._163}}</button></td>
+                          </tr>
+                      </table>
+                      <hr>
+                      <br>
+                </div>
+            </ng-template>
+        </mat-expansion-panel><br/>
+
+        <!--<mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <b>{{text._62}}</b>&nbsp;{{text._63}}
+            </mat-expansion-panel-header>
+          
+            <ng-template matExpansionPanelContent>
+                <div class="prikaz" *ngFor='let novi of noviTurniri'>
+                    <div *ngIf='novi.naziv_tipa_turnira=="Cup"' class="slika">
+                      <img src="{{server}}/images/slike_za_kup_i_ligu/zakup.jpg" width="100px" height="90px">
+                    </div>
+                    <div *ngIf='novi.naziv_tipa_turnira=="League"' class="slika">
+                        <img src="{{server}}/images/slike_za_kup_i_ligu/zaligu.jpg" width="100px" height="90px">
+                    </div>  
+            
+                      <span class="nazivTura"> {{novi.naziv_turnira}} </span><br>
+                      <p class="prazanRed"> </p>
+                      <span class="info">{{novi.naziv_tipa_turnira}}</span>
+                      <span class="info">{{text._206 }} {{novi.datum_odigravanja}}</span>
+                      <span class="info"> {{novi.broj_ucesnika}} {{text._46}}</span>
+                      <span class="infokraj"> <button type="button" class="btn btn-primary" (click)="ManageNew(novi)">{{text._163}}</button></span>
+                      <hr>
+                      <br>
+                </div>
+            </ng-template>
+        </mat-expansion-panel><br/>-->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <b>{{text._62}}</b>&nbsp;{{text._63}}
+            </mat-expansion-panel-header>
+          
+            <ng-template matExpansionPanelContent>
+                <div [hidden]="uTokuTurniri.length!=0">
+                    <label class="nemaTurnira" style="font-size: 100%">{{text._556}}</label>
+                  </div>
+                <div class="prikaz" *ngFor='let uTokuT of uTokuTurniri'>
+                    
+                    <div *ngIf='uTokuT.naziv_tipa_turnira=="Cup"' class="slika">
+                      <img src="{{server}}/images/slike_za_kup_i_ligu/zakup.jpg" width="100px" height="90px">
+                    </div>
+                    <div *ngIf='uTokuT.naziv_tipa_turnira=="League"' class="slika">
+                        <img src="{{server}}/images/slike_za_kup_i_ligu/zaligu.jpg" width="100px" height="90px">
+                    </div>  
+            
+                      <span class="nazivTura"> {{uTokuT.naziv_turnira}} </span><br>
+                      <p class="prazanRed"> </p>
+                      <table>
+                          <tr>
+                            <td>{{uTokuT.naziv_tipa_turnira}}</td>
+                            <td>{{text._205}}: {{uTokuT.datum_odigravanja | date: 'short'}}</td>
+                            <td> {{uTokuT.broj_ucesnika}} {{text._46}}</td>
+                            <td><button type="button" class="btn btn-primary" (click)="ManageFinished(uTokuT)">{{text._59}}</button></td>
+                          </tr>
+                      </table>
+                      <hr>
+                      <br>
+                </div>
+            </ng-template>
+        </mat-expansion-panel><br/>
+
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <b>{{text._64}}</b>&nbsp;{{text._65}}
+            </mat-expansion-panel-header>
+          
+            <ng-template matExpansionPanelContent>
+                <div [hidden]="zavrseniTurniri.length!=0">
+                    <label class="nemaTurnira" style="font-size: 100%">{{text._556}}</label>
+                  </div>
+                <div class="prikaz" *ngFor='let zavrseni of zavrseniTurniri'>
+                    <div *ngIf='zavrseni.naziv_tipa_turnira=="Cup"' class="slika">
+                      <img src="{{server}}/images/slike_za_kup_i_ligu/zakup.jpg" width="100px" height="90px">
+                    </div>
+                    <div *ngIf='zavrseni.naziv_tipa_turnira=="League"' class="slika">
+                        <img src="{{server}}/images/slike_za_kup_i_ligu/zaligu.jpg" width="100px" height="90px">
+                    </div>  
+            
+                      <span class="nazivTura"> {{zavrseni.naziv_turnira}} </span><br>
+                      <p class="prazanRed"> </p>
+                      <table>
+                          <tr>
+                            <td>{{zavrseni.naziv_tipa_turnira}}</td>
+                            <td>{{text._205}}: {{zavrseni.datum_odigravanja | date: 'short'}}</td>
+                            <td> {{zavrseni.broj_ucesnika}} {{text._46}}</td>
+                            <td><button type="button" class="btn btn-primary" (click)="ManageFinished(zavrseni)">{{text._59}}</button></td>
+                          </tr>
+                      </table>
+                      <hr>
+                      <br>
+                    </div>
+            </ng-template>
+        </mat-expansion-panel>
+
+        <br><br>
+
+    </div>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,361 @@
+<!--
+    <div class="container" *ngIf="text">
+
+    <div class="row">
+        <div class="col-lg-12">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="slika">
+                        <label class="filebutton">
+                            <img id="slikaKorisnika" src="{{server}}/images/avatar/{{korisnikPom.avatar}}" alt="{{korisnik.korisnicko_ime}}" height="250px"
+                                width="100%" style="border-radius: 3%;">
+                            <span>
+                                <input type="file" accept="image/*" id="myfile" name="avatar" (change)="onFileSelected($event.target.files)">
+                            </span>
+                        </label>
+                        <div class="overlay">
+                            <div class="text">
+                                {{text._27}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <div style="text-align: center">
+                        <p style="color: orange;font-size: 28px;font-weight: bold;">{{korisnik.korisnicko_ime}}</p>
+                        <p *ngIf="drzavaPitanje" style="font-size: 20px;margin-bottom: 10px;">{{korisnik.drzava}}</p>
+                        <p *ngIf="organizacijaPitanje" style="font-size: 20px;margin-bottom: 0;"> {{korisnik.organizacija}}</p>
+                        <br/>
+                        <hr style="margin-top: 5px;background-color: black;">
+                        <div class="row">
+
+                            <div class="col-md-5">
+                                <p>
+                                    <span style="font-size: 18px;">{{text._28}}:</span>
+                                    <br/>
+                                    <span style="font-size: 22px;"> {{brojBotova}}</span>
+                                </p>
+                            </div>
+                            <div class="col-md-7">
+                                <p>
+                                    <span style="font-size: 18px;">{{text._29}}:</span>
+                                    <br/>
+                                    <span style="font-size: 22px;">{{brojTurnira}}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr style="margin-top: 5px;background-color: black;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                    <span style="font-size: 18px;">{{text._30}}</span>
+                                    <br/>
+                                    <span style="font-size: 22px;"> {{korisnik.rejting}}</span>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-9">
+                    <br/>
+                    <br/>
+                    <div class="row">
+                        <form class="example-form malodesno">
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width" (change)=ProveraKorisnickogImena()>
+                                    <input matInput placeholder="{{text._6}}" [(ngModel)]="korisnikPom.korisnicko_ime" type="text" name="korisnicko_ime">
+
+                                    <mat-error *ngIf="proveraKorisnickogImena!=''">
+                                        {{proveraKorisnickogImena}}
+                                    </mat-error>
+
+                                </mat-form-field>
+                                <span *ngIf="proveraKorisnickogImena!=''" matTooltip="{{proveraKorisnickogImena}}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                                </span>
+                                <br>
+                                <!--<label style="color: red;font-size:13px;">{{proveraKorisnickogImena}}</label>
+
+                                <br/>
+
+                                <mat-form-field class="example-full-width" (change)=ProveraEmail()>
+                                    <input matInput placeholder="Email" [(ngModel)]="korisnikPom.email" type="text" name="email">
+                                    <mat-error *ngIf="proveraEmail!=''">
+                                        {{proveraEmail}}
+                                    </mat-error>
+                                </mat-form-field>
+                                <span *ngIf="proveraEmail!=''" matTooltip="{{proveraEmail}}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                                </span>
+                                <br>
+
+                                <br/>
+
+                                <mat-form-field class="example-full-width" (change)=ProveraSifreStare()>
+                                    <input matInput placeholder="{{text._7}}" [(ngModel)]="korisnikPom.lozinka" type="password" name="lozinka">
+                                    <mat-error *ngIf="proveraStareSifre!=''">
+                                        {{proveraStareSifre}}
+                                    </mat-error>
+                                </mat-form-field>
+                                <span *ngIf="proveraStareSifre!=''" matTooltip="{{proveraStareSifre}}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                                </span>
+                                <br>
+
+                                <br/>
+
+                                <mat-form-field class="example-full-width" (change)=ProveraSifre()>
+                                    <input matInput placeholder="{{text._31}}" [(ngModel)]="novaLozinka" type="password" name="novaLozinka">
+                                    <mat-error *ngIf="proveraSifre!=''">
+                                        {{proveraSifre}}
+                                    </mat-error>
+                                </mat-form-field>
+                                <span *ngIf="proveraSifre!=''" matTooltip="{{proveraSifre}}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                                </span>
+                                <br>
+
+                                <br/>
+
+                                <mat-form-field class="example-full-width" (change)=PoklapanjeSifri()>
+                                    <input matInput placeholder="{{text._32}}" [(ngModel)]="novaLozinka2" type="password" name="novaLozinka2">
+                                    <mat-error *ngIf="proveraPoklapanjaSifri!=''">
+                                        {{proveraPoklapanjaSifri}}
+                                    </mat-error>
+                                </mat-form-field>
+                                <span *ngIf="proveraPoklapanjaSifri!=''" matTooltip="{{proveraPoklapanjaSifri}}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                                </span>
+                                <br>
+
+                                <br/>
+
+                                <mat-form-field class="example-full-width" (change)=ProveraOrganizacije()>
+                                    <input matInput placeholder="{{text._33}}" [(ngModel)]="korisnikPom.organizacija" type="text" name="organizacija">
+                                </mat-form-field>
+                                <span *ngIf="organizacijaProvera!=''" matTooltip="{{organizacijaProvera}}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                                </span>
+
+                                <ng-select name="tip_igre" [items]="countries" [addTag]="true" addTagText="Add new country " bindLabel="item" bindValue="item"
+                                    placeholder="Select country..." [(ngModel)]="korisnikPom.drzava" style="max-width: 400px">
+                                </ng-select>
+
+                                <br/>
+
+                                <button type="button" class="btn btn-primary btn-lg" (click)="Izmeni()">{{text._34}}</button>
+                                <button type="button" class="btn btn-primary btn-lg" (click)="Resetuj()">{{text._35}}</button>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field class="example-full-width" (change)=ProveraSifreStare()>
+                                    <input matInput placeholder="{{text._7}}" [(ngModel)]="korisnikPom.lozinka" type="password" name="lozinka">
+                                    <mat-error *ngIf="proveraStareSifre!=''">
+                                        {{proveraStareSifre}}
+                                    </mat-error>
+                                </mat-form-field>
+                                <span *ngIf="proveraStareSifre!=''" matTooltip="{{proveraStareSifre}}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                                </span>
+                                <br>
+
+                                <br/>
+
+                                <mat-form-field class="example-full-width" (change)=ProveraSifre()>
+                                    <input matInput placeholder="{{text._31}}" [(ngModel)]="novaLozinka" type="password" name="novaLozinka">
+                                    <mat-error *ngIf="proveraSifre!=''">
+                                        {{proveraSifre}}
+                                    </mat-error>
+                                </mat-form-field>
+                                <span *ngIf="proveraSifre!=''" matTooltip="{{proveraSifre}}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                                </span>
+                                <br>
+
+                                <br/>
+
+                                <mat-form-field class="example-full-width" (change)=PoklapanjeSifri()>
+                                    <input matInput placeholder="{{text._32}}" [(ngModel)]="novaLozinka2" type="password" name="novaLozinka2">
+                                    <mat-error *ngIf="proveraPoklapanjaSifri!=''">
+                                        {{proveraPoklapanjaSifri}}
+                                    </mat-error>
+                                </mat-form-field>
+                                <span *ngIf="proveraPoklapanjaSifri!=''" matTooltip="{{proveraPoklapanjaSifri}}" [matTooltipPosition]="position">
+                                    <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                                </span>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+-->
+<div class="container" *ngIf="text">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="slika">
+                        <label class="filebutton">
+                            <img id="slikaKorisnika" src="{{server}}/images/avatar/{{korisnikPom.avatar}}" alt="{{korisnik.korisnicko_ime}}" height="250px"
+                                width="100%" style="border-radius: 3%;"  >
+                            <span>
+                                <input type="file" accept="image/*" id="myfile" name="avatar" (change)="onFileSelected($event.target.files)">
+                            </span>
+                        </label>
+                        <div class="overlay">
+                            <div class="text">
+                                {{hoverSlika}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <br/>
+                    <div style="text-align: center">
+                        <p style="color: orange;font-size: 28px;font-weight: bold;">{{korisnik.korisnicko_ime}}</p>
+                        <p *ngIf="drzavaPitanje" style="font-size: 20px;margin-bottom: 10px;">{{korisnik.drzava}}</p>
+                        <p *ngIf="organizacijaPitanje" style="font-size: 20px;margin-bottom: 0;"> {{korisnik.organizacija}}</p>
+                        <br/>
+                        <hr style="margin-top: 5px;background-color: black;">
+                        <div class="row">
+
+                            <div class="col-md-5">
+                                <p>
+                                    <span style="font-size: 18px;">{{text._28}}:</span>
+                                    <br/>
+                                    <span style="font-size: 22px;"> {{brojBotova}}</span>
+                                </p>
+                            </div>
+                            <div class="col-md-7">
+                                <p>
+                                    <span style="font-size: 18px;">{{text._29}}:</span>
+                                    <br/>
+                                    <span style="font-size: 22px;">{{brojTurnira}}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <hr style="margin-top: 5px;background-color: black;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                    <span style="font-size: 18px;">{{text._30}}</span>
+                                    <br/>
+                                    <span style="font-size: 22px;">{{korisnik.rejting}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-9">
+                    <div class="row" style="padding-top: 8%; ">
+                        <div class="col-lg-6" style="padding-left: 10%;">
+                            <mat-form-field class="example-full-width" (change)=ProveraKorisnickogImena() >
+                                <input matInput placeholder="{{text._6}}" [(ngModel)]="korisnikPom.korisnicko_ime" type="text" name="korisnicko_ime" >
+
+                                <mat-error *ngIf="proveraKorisnickogImena!=''">
+                                    {{proveraKorisnickogImena}}
+                                </mat-error>
+
+                            </mat-form-field>
+                            <span *ngIf="proveraKorisnickogImena!=''" matTooltip="{{proveraKorisnickogImena}}" [matTooltipPosition]="position">
+                                <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                            </span>
+                            <br>
+                            <!--<label style="color: red;font-size:13px;">{{proveraKorisnickogImena}}</label>-->
+
+                            <br/>
+
+                            <mat-form-field class="example-full-width" (change)=ProveraEmail()>
+                                <input matInput placeholder="Email" [(ngModel)]="korisnikPom.email" type="text" name="email">
+                                <mat-error *ngIf="proveraEmail!=''">
+                                    {{proveraEmail}}
+                                </mat-error>
+                            </mat-form-field>
+                            <span *ngIf="proveraEmail!=''" matTooltip="{{proveraEmail}}" [matTooltipPosition]="position">
+                                <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                            </span>
+                            <br>
+
+                            <br/>
+
+                            <mat-form-field class="example-full-width" (change)=ProveraOrganizacije()>
+                                <input matInput placeholder="{{text._33}}" [(ngModel)]="korisnikPom.organizacija" type="text" name="organizacija">
+                            </mat-form-field>
+                            <span *ngIf="organizacijaProvera!=''" matTooltip="{{text._578}}" [matTooltipPosition]="position">
+                                <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                            </span>
+                            
+                            <br><br>
+                            
+                            <label>{{text._1517}}</label>
+                            <br>
+                            <ng-select name="tip_igre" [items]="countries" bindLabel="item" bindValue="item"
+                                placeholder="{{ text._1077 }}" [(ngModel)]="korisnikPom.drzava" style="width: 90%;">
+                            </ng-select>
+
+                        </div>
+
+
+
+                        <div class="col-lg-6" style="padding-left: 10%;">
+                            <h4 style="padding-left: 20%;">{{text._574}}</h4>
+                            <br>
+                            <mat-form-field class="example-full-width" (change)=ProveraSifreStare()>
+                                <input matInput placeholder="{{text._7}}" [(ngModel)]="korisnikPom.lozinka" type="password" name="lozinka">
+                                <mat-error *ngIf="proveraStareSifre!=''">
+                                    {{text._577}}
+                                </mat-error>
+                            </mat-form-field>
+                            <span *ngIf="proveraStareSifre!=''" matTooltip="{{proveraStareSifre}}" [matTooltipPosition]="position">
+                                <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                            </span>
+                            <br>
+
+                            <br/>
+
+                            <mat-form-field class="example-full-width" (change)=ProveraSifre()>
+                                <input matInput placeholder="{{text._31}}" [(ngModel)]="novaLozinka" type="password" name="novaLozinka">
+                                <mat-error *ngIf="proveraSifre!=''">
+                                    {{text._1013}}
+                                </mat-error>
+                            </mat-form-field>
+                            <span *ngIf="proveraSifre!=''" matTooltip="{{proveraSifre}}" [matTooltipPosition]="position">
+                                <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                            </span>
+                            <br>
+
+                            <br/>
+
+                            <mat-form-field class="example-full-width" (change)=PoklapanjeSifri()>
+                                <input matInput placeholder="{{text._32}}" [(ngModel)]="novaLozinka2" type="password" name="novaLozinka2">
+                                <mat-error *ngIf="proveraPoklapanjaSifri!=''">
+                                    {{text._93}}
+                                </mat-error>
+                            </mat-form-field>
+                            <span *ngIf="proveraPoklapanjaSifri!=''" matTooltip="{{proveraPoklapanjaSifri}}" [matTooltipPosition]="position">
+                                <img id='logo' src='../../../assets/images/uzvicnik.png' />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-top: 5%; padding-left: 10%">
+                        <br/>
+                        <button type="button" class="btn btn-primary btn-lg" (click)="Izmeni()">{{text._34}}</button>
+                        <button type="button" class="btn btn-primary btn-lg" (click)="Resetuj()" style="margin-left: 3%;">{{text._35}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

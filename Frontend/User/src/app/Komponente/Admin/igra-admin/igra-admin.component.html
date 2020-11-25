@@ -1,0 +1,69 @@
+<div class="container">
+  <mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened="true" class="example-sidenav"
+  [fixedInViewport]="true" [fixedTopGap]="100"
+  [fixedBottomGap]="20">
+      <app-game-sidebar></app-game-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <div *ngIf="igra && text" class="row">
+    <div class="col-md-10">
+    <div class="bs-component">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/admin/igra/{{ igra.id_igre }}/detalji">{{text._36}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/admin/igra/{{ igra.id_igre }}/izmeniIgru">{{text._39}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/admin/igra/{{ igra.id_igre }}/kreirajTurnir">{{text._149}}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/admin/igra/{{ igra.id_igre }}/turniri">{{text._38}}</a>
+        </li>
+        <li *ngIf="turnir!=null && turnirService.obradaPrijaveAdmin==true && turnirService.pregledNovogTurnriraAdmin==false" class="nav-item">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/admin/igra/{{ igra.id_igre }}/obradaPrijava">
+            {{ turnir.naziv_turnira }}
+            <img style="width: 30px;" src="../../../assets/images/if_Close_132419.png" (click)="ZatvoriTab()" style="margin-left: 10px;">
+          </a>
+        </li>
+        <li *ngIf="turnir!=null &&  turnirService.pregledNovogTurnriraAdmin==true && turnirService.obradaPrijaveAdmin==false" class="nav-item">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/admin/igra/{{ igra.id_igre }}/pregledNovogTurnira">
+            {{ turnir.naziv_turnira }}
+            <img style="width: 30px;" src="../../../assets/images/if_Close_132419.png" (click)="ZatvoriTabNovi()" style="margin-left: 10px;">
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="turnir!=null && turnirService.gledanjeOtvoreno == true && turnirService.pregledLige==false">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/admin/igra/{{ igra.id_igre }}/pregledKupa">
+            {{ turnir.naziv_turnira }}
+            <img style="width: 30px;" src="../../../assets/images/if_Close_132419.png" (click)="ZatvoriTabPregleda()" style="margin-left: 10px;">
+          </a>
+        </li>
+        <li class="nav-item" *ngIf="turnir!=null && turnirService.pregledLige == true">
+          <a class="nav-link" [routerLinkActive]="['active']" routerLink="/admin/igra/{{ igra.id_igre }}/pregledLige">
+            {{ turnir.naziv_turnira }}
+            <img style="width: 30px;" src="../../../assets/images/if_Close_132419.png" (click)="ZatvoriTabPregledaLige()" style="margin-left: 10px;">
+          </a>
+        </li>
+      </ul>
+      
+      <router-outlet></router-outlet>
+
+    </div>
+    </div>
+    <div class="col-md-2"></div>
+    </div>
+
+  </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <div *ngIf="igra" id="izabranaIgra" style="text-align: center;">
+      <img class="slika_igre_prikaz" src="{{ server }}/images/slike_igara/{{ igra.slika_igre }}" alt="{{ igra.naziv_igre }}" style="border-radius: 10%;">
+      <br><br>
+      <h1 style="font-size: 40px; text-align: center">{{ igra.naziv_igre | titlecase }}</h1>  
+  </div>
+
+</div>

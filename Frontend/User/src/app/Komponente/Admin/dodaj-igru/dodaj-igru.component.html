@@ -1,0 +1,176 @@
+<div class="container" *ngIf="text">
+  <div class="row">
+    <div class="col-md-8">
+      <h1>{{text._111}}</h1><br>    
+    </div>
+    <div class="col-md-2">
+      <button (click)="VratiSe()" style="max-width: 200px; margin-left: 50px;" type="button" class="btn btn-outline-primary">{{text._112}}</button>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <form>
+        <div class="form-group" (change)="ProveraNazivIgre()">
+            <label><span style="color: red">*  </span>{{text._113}}</label>
+            <input type="text" class="form-control" [(ngModel)]="igra.naziv_igre" placeholder="{{text._114}}" name="ime_igre" style="max-width: 400px">
+            <label style="color: red">{{proveraNazivIgre}}</label>
+        </div>
+        <div *ngIf="izabraniJezik == 'en'" class="form-group">
+          <label><span style="color: red">*  </span>{{text._115}}</label>
+          <ng-select (change)="ProveraTipIgre()"
+            name="tip_igre"  
+            [items]="tipovi"
+            bindLabel="naziv_tipa_igre"
+            bindValue="naziv_tipa_igre"
+            placeholder="{{text._116}}"
+            [(ngModel)]="igra.naziv_tipa_igre"
+            style="max-width: 400px"
+          >
+          </ng-select>
+          <label style="color: red">{{proveraTipIgre}}</label>
+        </div>
+        <div *ngIf="izabraniJezik == 'srb'" class="form-group">
+          <label><span style="color: red">*  </span>{{text._115}}</label>
+          <ng-select (change)="ProveraTipIgre()"
+            name="tip_igre"  
+            [items]="tipovi"
+            bindLabel="naziv_tipa_igre_srb"
+            bindValue="naziv_tipa_igre"
+            placeholder="{{text._116}}"
+            [(ngModel)]="igra.naziv_tipa_igre"
+            style="max-width: 400px"
+          >
+          </ng-select>
+          <label style="color: red">{{proveraTipIgre}}</label>
+        </div>
+        <div>
+        <mat-radio-group class="example-radio-group" name="radio" [(ngModel)]="izabraniTipIgrePT" #pomocna>
+          <mat-radio-button class="example-radio-button" *ngFor="let tip of tipoviIgaraPT" [value]="tip">
+            <img width="33px;" src="../../../../assets/images/team.png" *ngIf="tip===text._41"> 
+            <img width="33px;" src="../../../../assets/images/single.png" *ngIf="tip===text._40">
+            {{tip}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+        <div class="form-group" (change)="ProveraBrojIgraca()" [hidden]="izabraniTipIgrePT!==text._41">
+          <label><span style="color: red">*  </span>{{text._117}}</label>
+          <input type="number" min="1" class="form-control" placeholder="{{text._118}}" name="broj_igraca" [(ngModel)]="igra.broj_igraca" style="max-width: 400px">
+          <label style="color: red">{{proveraBrojIgraca}}</label>
+        </div>
+
+        <br>
+        <div class="form-group" style="max-width: 400px;">
+          <label><span style="color: red">  </span>{{text._552}}</label>
+          <img src="../../../../assets/images/tooltip.png" matTooltip="{{ text._196 }}" [matTooltipPosition]="position">
+          <table class="table table-hover tabelaBotova">
+              <tbody>
+                  <tr *ngFor="let i of tipoviBotova; let j = index" [hidden]="tipoviBotova.length==0">
+                      <td>{{i}}</td>
+                      <td>
+                        <img src="../../../../assets/images/x.png" matTooltip="{{text._550}}" [matTooltipPosition]="position" (click)="IzbaciBotaIzNiza(j)">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td >
+                          <input type="text" class="form-control inputTipBota" [(ngModel)]="tipBota" placeholder="{{text._548}}" name="tip_bota" >
+                          <img src="../../../../assets/images/uzvicnik.png" [hidden]="proveraBota==''" matTooltip="{{proveraBota}}" [matTooltipPosition]="position" class="slikaUzvicnikTipBota">
+                      </td>
+                      <td>
+                          <button type="button" class="btn btn-primary" (click)="DodajBota()">{{text._553}}</button>
+                      </td>
+                    </tr>
+              </tbody>
+          </table>
+        </div>
+        <br>
+        
+
+
+        <div class="form-group" (change)="ProveraTrajanje()">
+          <label><span style="color: red">*  </span>{{text._126}}</label>
+          <input type="number" min="1" class="form-control" [(ngModel)]="igra.trajanje_u_sekundama"  placeholder="{{text._119}}" name="trajanje_igre" style="max-width: 400px">
+          <label style="color: red">{{proveraTrajanje}}</label>
+        </div>
+        <div class="form-group" (change)="ProveraFajlIgre()">
+          <label><span style="color: red">*  </span>{{text._120}}</label>
+          <input id="fajl_igre" type="file" class="form-control file_input" name="fajl_igre" (change)="dodavanjeFajlaIgre($event.target.files)" placeholder="{{text._120}}" style="max-width: 300px">
+          <label style="color: red">{{proveraFajlIgre}}</label>
+        </div>
+        <!--
+        
+        <div class="form-group">
+          <label>Game icon:</label>
+          <input type="file" class="form-control file_input" accept="image/*" name="slika_igre" (change)="dodavanjeSlikeIgre($event.target.files)"  placeholder="Choose file of the game" style="max-width: 300px"/>
+        </div>
+        -->
+        
+      </form>
+    </div>
+    <div class="col-md-4">
+        <h6>{{text._121}}</h6>
+        <div class="slika" style="text-align: center;">
+            <label class="filebutton">
+                <img id="slikaIgre" src="{{server}}/images/slike_igara/default.png" alt="Avatar" max-height="250px" width="80%" style="border-radius: 3%;">
+                <span>
+                    <input id="myfile" type="file" class="form-control file_input" accept="image/*" name="slika_igre" (change)="dodavanjeSlikeIgre($event.target.files)"  placeholder="{{text._120}}" style="max-width: 300px"/>
+                </span>
+            </label>
+            <div class="overlay">
+                <div class="text">
+                  {{text._121}}
+                </div>
+            </div>
+        </div>
+        <br/>
+        <h6>{{text._562}}</h6>
+        <div class="slika" style="text-align: center;">
+          <label class="filebutton">
+              <img id="slikaPozadineIgre" src="{{server}}/images/slike_pozadine_igara/default.jpg" alt="Avatar" max-height="250px" width="80%" style="border-radius: 3%;">
+              <span>
+                  <input id="myfile" type="file" class="form-control file_input" accept="image/*" name="slika_pozadine_igre" (change)="dodavanjeSlikePozadineIgre($event.target.files)"  placeholder="{{text._120}}" style="max-width: 300px"/>
+              </span>
+          </label>
+          <div class="overlay">
+              <div class="text">
+                {{text._563}}
+              </div>
+          </div>
+      </div>
+        <br>
+        <div class="form-group" [hidden]="kratakOpisJezik=='srb'" (change)="ProveraKratakOpis()">
+          <label>Short game description:</label>
+          <button type="button" class="btn btn-primary btn-sm" style="float:right; width: 13%" (click)="PromeniKratakOpis()" matTooltip="Add short description in serbian." [matTooltipPosition]="position">SRB</button>
+          <textarea rows="6" class="form-control" name="kratak_opis" [(ngModel)]="igra.kratak_opis_en" placeholder="Enter a short description of the game" style="max-width: 500px"></textarea>
+          <label style="color: red">{{proveraKratakOpis}}</label>
+        </div>
+        <div class="form-group" [hidden]="kratakOpisJezik=='en'" (change)="ProveraKratakOpis()">
+          <label>Kratak opis igre:</label>
+          <button type="button" class="btn btn-primary btn-sm" style="float:right; width: 13%" (click)="PromeniKratakOpis()" matTooltip="Unesite kratak opis na engleskom." [matTooltipPosition]="position">EN</button>
+          <textarea rows="6" class="form-control" name="kratak_opis" [(ngModel)]="igra.kratak_opis_srb" placeholder="Unesite kratak opis" style="max-width: 500px"></textarea>
+          <label style="color: red">{{proveraKratakOpis}}</label>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10">
+        <div class="form-group" [hidden]="pravilaIgreJezik=='srb'">
+          <label>Game rules:</label>
+          <button type="button" class="btn btn-primary btn-sm" style="float:right; width: 13%" (click)="PromeniPravilaIgre()" matTooltip="Add game rules in serbian." [matTooltipPosition]="position">SRB</button>
+          <app-ngx-editor [placeholder]="Enter !" [spellcheck]="true" [(ngModel)]="igra.pravila_igre_en" height="100px" minHeight="50px"></app-ngx-editor>
+          <label style="color: red">{{proveraPravilaIgre}}</label>
+        </div>
+        <div class="form-group" [hidden]="pravilaIgreJezik=='en'">
+          <label>Pravila igre:</label>
+          <button type="button" class="btn btn-primary btn-sm" style="float:right; width: 13%" (click)="PromeniPravilaIgre()" matTooltip="Unesite pravila igre na engleskom." [matTooltipPosition]="position">EN</button>
+          <app-ngx-editor [placeholder]="Unesite!" [spellcheck]="true" [(ngModel)]="igra.pravila_igre_srb" height="100px" minHeight="50px"></app-ngx-editor>
+          <label style="color: red">{{proveraPravilaIgre}}</label>
+        </div>
+        <br>
+        <button type="button" class="btn btn-primary btn-lg" (click)="DodajIgru()">{{text._125}}</button>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>

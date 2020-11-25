@@ -1,0 +1,14 @@
+#dugmence
+{
+    min-width: 300px;
+    font-weight: 550;
+}
+
+#pretraga
+{
+    border: 1px solid rgb(218, 215, 215);
+    background-color: rgb(236, 236, 236);
+    padding: 20px;
+    padding-bottom: 0;
+    border-bottom: none;
+}

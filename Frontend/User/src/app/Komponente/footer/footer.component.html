@@ -1,0 +1,30 @@
+<div class="push"></div>
+<div class="container-fluid" *ngIf="text">
+  <div class="footer row">
+    <div id="linkovi" class="col-md-3">
+        <a class="flink" routerLink="/faq">{{text._22}}</a>
+        
+        <!--<a (click)='OtvoriTab()'>{{text._1010}}</a>-->
+        <span class="flink" *ngIf="text && jezik=='en'">
+            <a  href="assets/Uputstvo/Uputstvo.pdf" download> {{text._1010}}</a>
+        </span>
+        <span class="flink" *ngIf="text && jezik=='srb'"> 
+            <a  href="assets/Uputstvo/Uputstvo.pdf" download>{{text._1010}}</a>
+        </span>
+        
+        <a class="flink" routerLink="/onama">{{text._21}}</a>
+    </div>    
+    <div id="klan" class="col-md-6">
+        <span class="naziv">&nbsp;PURE LOGIC GAMES</span><!--<img style="width: 20px; height: 20px;" id='logo' src='../../../assets/images/logo.png'>--><br>
+        <span style="font-style: italic;">© 2018 Copyright</span>
+        <img id='logo' src='../../../assets/images/logo.png'>
+    </div>
+    <div class="col-md-3">
+      <!--<span>{{text._20}}</span><br>-->
+      <a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook"></a>
+      <a href="https://twitter.com/" target="_blank" class="fa fa-twitter"></a>
+      <a href="https://www.youtube.com/" target="_blank" class="fa fa-youtube"></a>
+      <a href="https://github.com/" target="_blank" class="fa fab fa-github"></a>
+    </div>
+  </div>
+</div>

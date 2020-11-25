@@ -1,0 +1,116 @@
+/*
+.dropdown  
+{
+    position: fixed;
+    top: 1.8%;
+    right: 4%;
+    z-index: 10000;
+    width: 100px;
+}
+  
+.dropdown-menu 
+{
+    position: absolute;
+    display: none;
+    opacity: 0;
+    list-style-type: none;
+    background-color: black;
+    border-radius: 4px;
+    transition: .2s all ease-in;
+    right: 0;
+    text-align: left;
+}
+  
+.dropdown-menu li 
+{
+    padding: .5rem .8rem;
+}
+
+.dropdown-menu li + li 
+{
+    border-top: 1px solid #e1e1e1;
+}
+
+.dropdown-menu li > button
+{
+    display: block;
+    border-radius: 4px;
+    transition: .2s background-color ease-in;
+}
+
+.dropdown-menu li > a:hover 
+{
+    background-color: #e9e9e9;
+}
+
+.dropdown.open .dropdown-menu 
+{
+    display: block;
+    opacity: 1;
+    margin-top: 0;
+}
+
+a.neat 
+{
+    color: inherit;
+    text-decoration: none;
+}
+
+.btn-primary
+{
+    background-color: black;
+    border-color: black;
+    margin-bottom: 2px;
+}
+
+.btn-primary:hover
+{
+    background-color: black;
+    color: #008cba;
+    border-bottom: 1px solid #008cba;
+}
+
+.jezik
+{
+    color: white;
+    font-size: 16px;
+}
+*/
+
+
+/* LOADER */
+
+.loader 
+{
+  position: fixed;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  top:50%;
+  left:50%;
+
+  width: 120px;
+  height: 120px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.my-container
+{
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;  
+  z-index: 1000000;
+}
+
+.container
+{
+    min-height: calc(100vh - 70px);
+}

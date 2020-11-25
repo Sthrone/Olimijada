@@ -1,0 +1,38 @@
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary" *ngIf="nav.user && text">
+  <div class="container navig">
+    <a [routerLink]="['/index']" class="navbar-brand"><h4><img style="width: 50px;" id='olimijada' src='../../../assets/images/olimijada.gif'>&nbsp;Olimijada</h4></a>
+    <div class="btn-group btn-group-lg" style="text-align: right;">
+      <button type="button" class="btn btn-primary" [routerLink]="['/index/home']">{{text._2}}</button>
+      <!--<button type="button" class="btn btn-primary" [routerLink]="['/index/igra/-1']">{{text._3}}</button>-->
+      <button (click)="PosaljiNaIgre()" type="button" class="btn btn-primary">{{text._3}}</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['/index/lideri']">{{text._1028}}</button>
+      
+      <div class="dropdown" dropdown style="cursor: pointer;">
+        <h5 class="dropdown-toggle" dropdownToggle>
+          <img id="blah" src="{{server}}/images/avatar/{{slika}}" alt="Avatar" width="60px" height="50px;" style="border-radius: 40%;">
+        </h5>
+        <ul class="dropdown-menu" dropdownMenu >
+          <li>
+              <button *ngIf="isAdmin" type="button" class="btn btn-primary" [routerLink]="['/admin']">&nbsp;Admin portal</button>
+              <button type="button" class="btn btn-primary" [routerLink]="['/index/profil']"><i class="far fa-address-card"></i> {{text._23}}</button>
+              <hr>
+              <button (click)="IzvrsiOdjavu()" type="button" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> {{text._24}}</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="jezik_dropdown" dropdown style="cursor: pointer;">
+    <h5 class="jezik_dropdown-toggle" dropdownToggle>
+      <img src="./assets/images/{{selectedLanguage}}.png" alt="Selected language" width="32px" height="32px;" style="border-radius: 40%;">
+      <span class="jezik">{{ selectedLanguage }}</span>
+    </h5>
+    <ul class="jezik_dropdown-menu" dropdownMenu>
+      <li>
+          <button (click)="ChooseLanguage('en')" type="button" class="btn btn-primary jezik_btn">{{ en }}</button>
+          <button (click)="ChooseLanguage('srb')" type="button" class="btn btn-primary jezik_btn">{{ srb }}</button>
+      </li>
+    </ul>
+  </div>
+</div>

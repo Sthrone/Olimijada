@@ -1,0 +1,50 @@
+
+<div *ngIf="igra && text" >
+  <br>
+  <div style="text-align: center;">
+    <img class="slika_igre_prikaz" src="{{ server }}/images/slike_igara/{{ igra.slika_igre }}" alt="{{ igra.naziv_igre }}" style="border-radius: 10%;">
+    <br><br>
+
+    <h1>{{ igra.naziv_igre }}</h1>
+    <h3 *ngIf="izabraniJezik == 'en'">--- {{ igra.naziv_tipa_igre }} ---</h3>
+    <h3 *ngIf="izabraniJezik == 'srb'">--- {{ igra.naziv_tipa_igre_srb }} ---</h3>
+
+    <div *ngIf="aori === 'index'">
+      <button type="button" class="btn btn-outline-success" routerLink="/index/igra/{{ igra.id_igre }}/turniri"><i class="fa fas fa-trophy"></i>&nbsp;{{text._38}}</button>
+      <button type="button" class="btn btn-outline-success" routerLink="/index/igra/{{ igra.id_igre }}/botovi"><i class="fa fas fa-cogs"></i>&nbsp;{{text._37}}</button>
+    </div>
+    <div *ngIf="aori === 'admin'">
+      <button type="button" class="btn btn-outline-success" routerLink="/admin/igra/{{ igra.id_igre }}/turniri"><i class="fa fas fa-trophy"></i>&nbsp;{{text._38}}</button>
+      <button type="button" class="btn btn-outline-success" routerLink="/admin/igra/{{ igra.id_igre }}/izmeniIgru"><i class="fa fas fa-cogs"></i>&nbsp;{{text._39}}</button>
+    </div>
+  </div>
+
+  <br><br>
+  <div style="text-align: left;">
+    <h5 *ngIf="izabraniJezik == 'en'" style="border-bottom: 1px solid rgb(192, 190, 190); padding-bottom: 10px;">{{ igra.kratak_opis_en }}</h5>
+    <h5 *ngIf="izabraniJezik == 'srb'" style="border-bottom: 1px solid rgb(192, 190, 190); padding-bottom: 10px;">{{ igra.kratak_opis_srb }}</h5>
+
+    <div class="timska" *ngIf="igra.broj_igraca == 1">
+      <img width="33px;" src='../../../assets/images/single.png'>&nbsp;<span class="vazno">{{text._40}}</span>
+    </div>
+    <div class="timska" *ngIf="igra.broj_igraca > 1">
+      <h5><img width="40px;" src='../../../assets/images/team.png'>&nbsp;<span class="vazno">{{text._41}}</span>&nbsp;({{ igra.broj_igraca }} {{text._1097}})</h5><br><br>
+    </div>
+    <h5>{{text._42}}: <span class="manje_vazno">{{ igra.trajanje_u_sekundama }} {{text._43}}</span></h5>
+  </div>
+
+  <br><br>
+  <!-- Material dropdown -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <h2>{{text._44}}</h2>
+    </mat-expansion-panel-header>
+  
+    <ng-template matExpansionPanelContent>
+      <div *ngIf="izabraniJezik == 'en'" [innerHTML]="igra.pravila_igre_en"></div>
+      <div *ngIf="izabraniJezik == 'srb'" [innerHTML]="igra.pravila_igre_srb"></div>
+    </ng-template>
+  </mat-expansion-panel><br>
+
+</div>
+        

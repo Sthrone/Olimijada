@@ -1,0 +1,42 @@
+<div *ngIf="igra && text" class="container">
+  <br>
+  <h2>{{text._139}}<span style="color: #f1c605;">{{ igra.naziv_igre | titlecase }}</span> {{text._140}}</h2><br>
+  <form>
+    <div class="form-group">
+      <label><span style="color: red">*  </span>{{text._141}}</label><br>
+      <input type="text" class="form-control" name="tournament_name" [(ngModel)]="turnir.naziv_turnira" placeholder="{{text._142}}" style="max-width: 400px">
+      <label style="color: red">{{ proveraNazivaTurnira }}</label>
+    </div>
+    <div class="form-group">
+      <label><span style="color: red">*  </span>{{text._143}}</label><br>
+      <mat-radio-group name="radio" [(ngModel)]="turnir.id_tipa_turnira">
+          <mat-radio-button value="1">{{text._150}}</mat-radio-button><br>
+          <mat-radio-button value="2">{{text._151}}</mat-radio-button><br>
+          <label style="color: red">{{ proveraTipaTurnira }}</label>
+      </mat-radio-group>
+    </div>
+    <div class="form-group" (blur)="ProveriDatumPocetka()">
+      <label><span style="color: red">*  </span>{{text._144}}</label><br>
+      <input class="form-control" type="datetime-local" name="starting_date" [(ngModel)]="Pocetak" placeholder="{{text._145}}" style="max-width: 400px">
+      <label style="color: red">{{ proveraDatumaPocetka }}</label>
+    </div>
+    <div class="form-group" (blur)="ProveriDatumKraja()">
+      <label><span style="color: red">*  </span>{{text._146}}</label><br>
+      <input class="form-control" type="datetime-local" name="ending_date" [(ngModel)]="Kraj" placeholder="{{text._147}}" style="max-width: 400px">
+      <label style="color: red">{{ proveraDatumaKraja }}</label>
+    </div>
+    <div class="form-group" (blur)="ProveraDatumaOdigravanja()">
+      <label><span style="color: red">*  </span>{{text._148}}:</label><br>
+      <input class="form-control" type="datetime-local" name="playing_date" [(ngModel)]="Odigravanje" placeholder="{{text._148}}" style="max-width: 400px">
+      <label style="color: red">{{ proveraDatumaOdigravanja }}</label>
+    </div>
+      <!--<label><span style="color: red">*  </span>Number of players:</label>
+      <input type="number" min="1" class="form-control" [(ngModel)]="turnir.broj_ucesnika"  placeholder="Enter number of players" name="broj_ucesnika" style="max-width: 400px">
+      <label style="color: red">{{ proveraBrojIgraca }}</label> -->
+    <div class="form-group">
+      <button type="button" class="btn btn-primary btn-lg" (click)="DodajTurnir()">{{text._149}}</button>
+    </div>
+  </form>
+</div>
+
+

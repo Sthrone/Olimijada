@@ -1,0 +1,30 @@
+td, tr
+{
+    font-size: 130%;
+    padding-right: 50px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+tr
+{
+    border-bottom: 1px solid rgba(209, 209, 209, 0.63);
+}
+
+#podaci
+{
+    width:40%;
+    padding:10px;
+}
+
+.malodesno
+{
+    margin-left: 3%;
+    font-size: 120%;
+}
+
+.headeri
+{
+    font-style: italic;
+    font-size: 80%;
+}

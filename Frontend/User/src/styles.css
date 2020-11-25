@@ -1,0 +1,55 @@
+.file_input
+{
+    background-color: rgb(176, 213, 216) !important;
+}
+
+.kanta:hover
+{
+    border-radius: 7px;
+    background-color: rgb(109, 101, 101);
+}
+
+.mat-tooltip
+{
+    font-size: 13px !important;
+}
+
+.loader 
+{
+  position: fixed;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+  top:50%;
+  left:50%;
+
+  width: 120px;
+  height: 120px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.my-container
+{
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;  
+  z-index: 10000;
+}
+
+body, html
+{
+  overflow-x: hidden;
+}
+
+.right.carousel-control, .left.carousel-control 
+{
+  display: none;
+}

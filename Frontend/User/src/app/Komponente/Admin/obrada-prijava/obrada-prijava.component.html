@@ -1,0 +1,116 @@
+<div *ngIf="turnir && text" class="row" id="glavni">
+  <div class="col-lg-10">
+  <br>
+  <h2>{{text._171}} <span style="color: #f1c605;">{{ turnir.naziv_turnira | titlecase }}</span> {{text._172}}</h2><br>
+
+  <h5 *ngIf="korisnici.length == turnir.broj_ucesnika" class="right">
+    {{text._173}}
+  </h5>
+  <h5 *ngIf="korisnici.length < turnir.broj_ucesnika" class="wrong">
+    {{text._174}}
+  </h5>
+  <br>
+
+  <h5>{{text._175}}</h5>
+  <div *ngIf="korisnici.length == turnir.broj_ucesnika" class="row">
+    <div class="col-lg-6">
+      <h6>{{text._176}}</h6>
+      <ul>
+        <li>{{text._177}}</li>
+        <li>{{text._178}}</li>                
+      </ul>
+
+      <div class="form-group">
+        <label>{{text._179}}</label><br>
+        <h6 style="text-align: center;">{{ turnir.datum_odigravanja }}</h6>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <h6>{{text._180}}</h6>
+      <ul>
+        <li>{{text._181}}</li>
+        <li>{{text._182}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="korisnici.length < turnir.broj_ucesnika" class="row">
+    <div class="col-lg-6">
+      <h6>{{text._183}}</h6>
+      <ul>
+        <li>{{text._184}}</li>
+        <li>{{text._185}}</li>
+      </ul>
+      <div class="form-group" (blur)="ProveraDatumKraja()">
+        <label><span style="color: red">*  </span>{{text._186}}</label><br>
+        <input class="form-control" type="datetime-local" name="ending_date" [(ngModel)]="Kraj" placeholder="Ending time" style="max-width: 400px">
+        <label style="color: red">{{ proveraDatumaKraja }}</label>
+      </div>
+      <div class="form-group" (blur)="ProveraDatumOdigravanja()">
+        <label><span style="color: red">*  </span>{{text._187}}</label>&nbsp;<span matTooltip="{{ ttp_01 }} {{ turnir.datum_odigravanja }}" [matTooltipPosition]="position"><img id='logo' width="20px" src='../../../assets/images/tooltip.png' /></span><br>
+        <!-- <input type="date" [ngModel] ="turnir.datum_odigravanja | date:'mm/dd/yyyy'" (ngModelChange)="turnir.datum_odigravanja = $event"> -->
+        <input class="form-control" type="datetime-local" name="starting_date" [(ngModel)]="Odigravanje" placeholder="Starting time" style="max-width: 400px">
+        <label style="color: red">{{ proveraDatumaPocetka }}</label>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <h6>{{text._188}}</h6>
+      <ul>
+        <li>{{text._189}}</li>
+        <li>{{text._190}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!--  DUGMICI  -->
+
+  <div *ngIf="korisnici.length == turnir.broj_ucesnika" class="row">
+    <div class="col-lg-6">
+      <!-- <button type="button" class="btn btn-primary btn-default">{{text._191}}</button> -->
+    </div>
+    <div class="col-lg-6">
+        <button (click)="ZapocniTurnir()" type="button" class="btn btn-primary btn-default">{{text._192}}</button>
+    </div>
+  </div>
+  
+  <div *ngIf="korisnici.length < turnir.broj_ucesnika" class="row">
+    <div class="col-lg-6">
+      <button (click)="ProduziPeriod()" type="button" class="btn btn-primary btn-default">{{text._193}}</button>
+    </div>
+    <div class="col-lg-6">
+      <button (click)="UkloniTurnir()" type="button" class="btn btn-primary btn-default">{{text._194}}</button>
+    </div>
+  </div>
+  
+  <!--    TABELA    -->
+
+  <h5 style="margin-top: 50px;">
+    {{text._195}}
+    <span *ngIf="korisnici.length == turnir.broj_ucesnika" class="right">{{ korisnici.length }} / {{ turnir.broj_ucesnika }} </span>
+    <span *ngIf="korisnici.length < turnir.broj_ucesnika" class="wrong">{{ korisnici.length }} / {{ turnir.broj_ucesnika }} </span>
+  </h5>
+
+  <div class="row">
+    <table class="table table-hover">
+    <thead>
+        <tr>
+          <th scope="col">{{text._6}}</th>
+          <th scope="col">{{text._91}}</th>
+          <th scope="col">{{text._33}}</th>
+          <th scope="col">{{text._30}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let korisnik of korisnici">
+          <td><a routerLink="/admin/pregledKorisnika/{{ korisnik.id_korisnika }}">{{korisnik.korisnicko_ime}}</a></td>
+          <td>{{korisnik.drzava}}</td>
+          <td>{{korisnik.organizacija}}</td>
+          <td>{{korisnik.rejting}}</td>
+        </tr>
+    </tbody>
+    </table> 
+  </div>
+  </div>
+  <div class="col-lg-2"></div>
+
+</div>

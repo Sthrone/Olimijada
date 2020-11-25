@@ -1,0 +1,154 @@
+<div class="container" *ngIf="text">
+
+  <div class="row" *ngIf="text">
+    <div class="col-lg-3">
+      <img src="{{server}}/images/avatar/{{korisnik.avatar}}" alt="{{korisnik.korisnicko_ime}}" height="250px" width="100%" style="border-radius: 3%;margin-bottom: 13px;">
+
+      <br/>
+      <br/>
+
+      <div style="text-align: center">
+        <p style="color: orange;font-size: 28px;font-weight: bold;">{{korisnik.korisnicko_ime}}</p>
+        <p *ngIf="drzavaPitanje" style="font-size: 20px;margin-bottom: 10px;margin-top: 3px;">{{korisnik.drzava}}</p>
+        <p *ngIf="organizacijaPitanje" style="font-size: 20px;margin-bottom: 0;"> {{korisnik.organizacija}}</p>
+        <br/>
+        <hr style="margin-top: 5px;background-color: black;">
+        <div class="row">
+
+          <div class="col-md-5">
+            <p>
+              <span style="font-size: 18px;">{{text._28}}:</span>
+              <br/>
+              <span style="font-size: 22px;"> {{brojBotova}}</span>
+            </p>
+          </div>
+          <div class="col-md-7">
+            <p>
+              <span style="font-size: 18px;">{{text._29}}:</span>
+              <br/>
+              <span style="font-size: 22px;">{{brojTurnira}}</span>
+            </p>
+          </div>
+        </div>
+        <hr style="margin-top: 5px;background-color: black;">
+        <div class="row">
+          <div class="col-md-12">
+            <p>
+              <span style="font-size: 18px;">{{text._30}}</span>
+              <br/>
+              <span style="font-size: 22px;"> {{korisnik.rejting}}</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-9">
+      <div class="row">
+        <!-- <div class="col-lg-6">
+          <br/>
+          <br/>
+          <div style="display: block;">
+            <div [chart]="chartPobede"></div>
+          </div>    
+        </div>
+        <div class="col-lg-6">
+          <br/>
+          <br/>
+          <div style="display: block;">
+            <div [chart]="chartPorazi"></div>
+          </div> -->
+
+
+        <div class="col-lg-6">
+          <br/>
+          <br/>
+          <span>
+            <label style="color: green; font-size: 150%;"> {{text._539}}</label>
+            <img src="../../../assets/images/tooltip.png" matTooltip="{{ text._533 }}" [matTooltipPosition]="position">
+          </span>
+          <br/>
+          <br/>
+          <div [hidden]="pobedeKorisnikaUlaz.length!=0">
+            <label style="font-size: 100%; font-style: italic;">{{text._546}}</label>
+          </div>
+          <div [hidden]="pobedeKorisnikaUlaz.length==0">
+            <table class="table table-hover">
+              <!--<thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">{{text._530}}</th>
+                    </tr>
+                </thead>-->
+              <tbody>
+                <tr *ngFor="let i of pobedeKorisnika; let j = index" (click)="PogledajKorisnika(i.id_korisnika)">
+                  <td width="15%">{{j+1}}</td>
+                  <td>
+                    <img src="{{server}}/images/avatar/{{i.avatar}}" alt="{{i.id_korisnika}}" width="28pt" height="28pt" style="border-radius: 50%;"> {{i.korisnicko_ime}}
+                  </td>
+                  <td>
+                      <span style="color:green"> {{i.broj_pobeda}}</span> / <span style="color:red">{{i.broj_poraza}}</span>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <br/>
+          <br/>
+          <span>
+            <label style="color: red; font-size: 150%;"> {{text._540}}</label>
+            <img src="../../../assets/images/tooltip.png" matTooltip="{{ text._534 }}" [matTooltipPosition]="position">
+          </span>
+          <br/>
+          <br/>
+          <div [hidden]="poraziKorisnika.length!=0">
+            <label style="font-size: 100%; font-style: italic;">{{text._547}}</label>
+          </div>
+          <div [hidden]="poraziKorisnika.length==0">
+            <table class="table table-hover">
+              <!--<thead>
+                  <tr>
+                      <th scope="col"></th>
+                      <th scope="col">{{text._530}}</th>
+                  </tr>
+              </thead>-->
+              <tbody>
+                <tr *ngFor="let i of poraziKorisnika; let j = index" (click)="PogledajKorisnika(i.id_korisnika)">
+                  <td width="15%">{{j+1}}</td>
+                  <td>
+                    <img src="{{server}}/images/avatar/{{i.avatar}}" alt="{{i.id_korisnika}}" width="28pt" height="28pt" style="border-radius: 50%;"> {{i.korisnicko_ime}}
+                  </td>
+                  <td>
+                      <span style="color:green"> {{i.broj_pobeda}}</span> / <span style="color:red">{{i.broj_poraza}}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <div class="col-lg-12" style="text-align: center">
+          <br/>
+          <br/>
+          <div style="display: block;">
+            <div [chart]="chartSve"></div>
+          </div>
+        </div>
+        <div class="col-lg-12" style="text-align: center">
+          <br/>
+          <br/>
+          <div style="display: block;">
+            <div [chart]="chartRejting"></div>
+          </div>
+        </div>
+        <h5>{{text._538}}</h5>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

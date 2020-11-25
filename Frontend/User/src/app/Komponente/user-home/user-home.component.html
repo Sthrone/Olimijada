@@ -1,0 +1,165 @@
+<div *ngIf="text" class="container">
+    
+    <!--
+    <div class="slikaP">
+        <h1 class="dobrodosli">{{text._1501}}<br>{{text._1502}}</h1>
+    </div>
+    -->
+
+    <h1 class="glavni_tekst"><i class="fa fas fa-home"></i> {{ text._2 }}</h1>
+    <br>
+    
+    <h4 style="text-align: center">{{text._537}}</h4>
+    <div style="display: block;">
+        <div [chart]="chartRejting"></div>
+    </div>
+    <p style="text-align: center;">{{text._1549}}<a routerLink="/index/profil/analiza" style="text-decoration: none;">{{text._1550}}</a></p>
+
+    <br><hr><br>
+
+    <h2>{{text._1503}}</h2>
+    <div class="zamenaTabele" [hidden]="najpopularnijeIgreKorisnika.length !== 0">{{text._1548}}</div>
+    <div [hidden]="najpopularnijeIgreKorisnika.length === 0" class="containter-fluid prazno">
+        <br>
+        <div class="row">
+            <div *ngFor="let igra of najpopularnijeIgreKorisnika" class="col-md-4 noselect">
+                <div class="card border-primary mb-3 hover" style="max-width: 20rem;"  (click)="proslediDoIgre(igra.id_igre)">
+                    <div class="card-header" style="text-align: center">
+                        <h4>
+                            <b>{{igra.naziv_igre}}</b>
+                            <img class="slicica_kartica" src="{{server}}/images/slike_igara/{{igra.slika_igre}}">
+                        </h4>
+                    </div>
+                    <div class="card-body" style="min-height: 100px">
+                        <p class="card-text">{{igra.kratak_opis | slice:0:100}}...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><hr><br>
+
+    <h2>{{text._1500}}</h2>
+    <div class="zamenaTabele" [hidden]="najpopularnijeIgre.length !== 0">{{text._1548}}</div>
+    <div [hidden]="najpopularnijeIgre.length === 0" class="containter-fluid prazno">
+        <br>
+        <div class="row">
+            <div *ngFor="let igra of najpopularnijeIgre" class="col-md-3 noselect"> 
+                <div class="card border-primary mb-3 hover" style="max-width: 20rem;" (click)="proslediDoIgre(igra.id_igre)">
+                    <div class="card-header" style="text-align: center">
+                        <h4>
+                            <b>{{igra.naziv_igre}}</b>
+                            <img class="slicica_kartica" src="{{server}}/images/slike_igara/{{igra.slika_igre}}">
+                        </h4>
+                    </div>
+                    <div class="card-body" style="min-height: 100px">
+                        <p class="card-text">{{igra.kratak_opis | slice:0:69}}...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <br><hr><br>
+
+    <h2>{{text._1504}}</h2>
+    <div class="zamenaTabele" [hidden]="niz.length !== 0">{{text._1547}}</div>
+    <div [hidden]="niz.length === 0">
+        <br>
+        <div class="tabela">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="onemoguceno"> 
+                        <th scope="col" style="width: 15%;"><b>{{text._1506}}</b></th>
+                        <th scope="col" style="width: 15%;"><b>{{text._1507}}</b></th>
+                        <th scope="col" style="width: 15%;"><b>{{text._1508}}</b></th>
+                        <!--<th scope="col" style="width: 15%;"><b>{{text._1509}}</b></th>-->
+                        <th scope="col" style="width: 15%"><b>{{text._1543}}</b></th>
+                        <th style="padding-right: 30%;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i of niz" class="table-info" (click)="prijavljeniTurnir(i)"  matTooltip="{{text._570}}" [matTooltipPosition]="position">
+                            <th scope="row">{{i.naziv_turnira}}</th>
+                            <td>{{i.naziv_igre}}</td>
+                            <td>{{i.datum_odigravanja | date:'short'}}</td>
+                            <!--<td>{{i.broj_ucesnika}}</td>-->
+                            <td>{{i.naziv_tipa_turnira}}</td>
+                            <td></td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br><hr><br>
+
+    <h2>{{text._1505}}:</h2>
+    <div class="zamenaTabele" [hidden]="niz1.length !== 0">{{text._1547}}</div>
+    <div [hidden]="niz1.length === 0">
+        <br>
+        <div class="tabela">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="onemoguceno">
+                        <th scope="col" style="width: 15%;"><b>{{text._1506}}</b></th>
+                        <th scope="col" style="width: 15%;"><b>{{text._1507}}</b></th>
+                        <th scope="col" style="width: 15%;"><b>{{text._1508}}</b></th>
+                        <!--<th scope="col" style="width: 15%;"><b>{{text._1509}}</b></th>-->
+                        <th scope="col" style="width: 15%"><b>{{text._1543}}</b></th>
+                        <th style="padding-right: 30%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of niz1" class="table-info" (click)="prijavljeniTurnir(i)"  matTooltip="{{text._570}}" [matTooltipPosition]="position">
+                        <th scope="row">{{i.naziv_turnira}}</th>
+                        <td>{{i.naziv_igre}}</td>
+                        <td>{{i.datum_odigravanja | date:'short'}}</td>
+                        <!--<td>{{i.broj_ucesnika}}</td>-->
+                        <td>{{i.naziv_tipa_turnira}}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br><hr><br>
+
+    <h2>{{text._1552}}:</h2>
+    <div class="zamenaTabele" [hidden]="niz2.length !== 0">{{text._1074}}</div>
+    <div [hidden]="niz2.length === 0">
+        <br>
+        <div class="tabela">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="onemoguceno">
+                        <th scope="col" style="width: 15%;"><b>{{text._1506}}</b></th>
+                        <th scope="col" style="width: 15%;"><b>{{text._1543}}</b></th>
+                        <th scope="col" style="width: 15%;"><b>{{text._1513}}</b></th>
+                        <th scope="col" style="width: 15%;"><b>{{text._1553}}</b></th>
+                        <th scope="col" style="width: 15%"><b>{{text._1554}}</b></th>
+                        <th style="padding-right: 30%;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i of niz2" class="table-info" (click)="ZapocniMec(i.id_meca)" matTooltip="{{text._1555}}" [matTooltipPosition]="position">
+                        <th scope="row">{{i.naziv_turnira}}</th>
+                        <td>{{i.naziv_tipa_turnira}}</td>
+                        <td>{{i.naziv_igre}}</td>
+                        <td>{{i.vreme_pocetka | date:'short'}}</td>
+                        <td>{{i.korisnicko_ime}}</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="divSlike">
+        <img src='./assets/images/pocetna.gif' />
+    </div>
+    
+</div>

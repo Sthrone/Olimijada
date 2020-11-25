@@ -1,0 +1,35 @@
+<div class="container">
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened="true" class="example-sidenav"
+  [fixedInViewport]="true" [fixedTopGap]="100"
+  [fixedBottomGap]="20">
+      <app-game-sidebar></app-game-sidebar>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    
+  <!--
+    <div class="bs-component">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]="['active']" data-toggle="tab" routerLink="/admin/upravljanjeIgrama/kreirajTurnir">Start a tournament</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]="['active']" data-toggle="tab" routerLink="/admin/upravljanjeIgrama/pregledTurnira">Preview tournaments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]="['active']" routerLink="/admin/upravljanjeIgrama/izmeniIgru">Edit game data</a>
+          </li>
+        </ul>
+        
+        <router-outlet></router-outlet>
+
+    </div>
+  -->
+
+  <app-detalji-igre></app-detalji-igre>
+
+  </mat-sidenav-content>
+ 
+</mat-sidenav-container>
+</div>

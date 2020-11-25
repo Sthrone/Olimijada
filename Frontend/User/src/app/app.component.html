@@ -1,0 +1,36 @@
+
+<app-admin-navbar></app-admin-navbar>
+<app-user-navbar></app-user-navbar>
+<app-navbar></app-navbar>
+
+<!--
+<div *ngIf="selectedLanguage && (nav.navbar || nav.admin || nav.user)" class="dropdown" dropdown style="cursor: pointer;">
+  <h5 class="dropdown-toggle" dropdownToggle>
+    <img src="./assets/images/{{selectedLanguage}}.png" alt="Selected language" width="32px" height="32px;" style="border-radius: 40%;">
+    <span class="jezik">{{ selectedLanguage }}</span>
+  </h5>
+  <ul class="dropdown-menu" dropdownMenu>
+    <li>
+        <button (click)="ChooseLanguage('en')" type="button" class="btn btn-primary">{{ en }}</button>
+        <button (click)="ChooseLanguage('srb')" type="button" class="btn btn-primary">{{ srb }}</button>
+    </li>
+  </ul>
+</div>
+-->
+
+<span *ngIf="nav.navbar || nav.admin || nav.user">
+  <br><br><br><br><br>
+</span>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<app-footer *ngIf="nav.navbar || nav.admin || nav.user" style="width: 100%"></app-footer>
+<div *ngIf="nav.navbar || nav.admin || nav.user" style="width: 100%">
+  
+</div>
+
+<div class="my-container">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>

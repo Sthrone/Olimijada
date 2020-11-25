@@ -1,0 +1,113 @@
+<div *ngIf="text" class="container">
+    <!--
+    <div class="slika">
+        <h1 class="dobrodosli">{{text._1501}}<br>{{text._1502}}</h1>
+    </div>
+    -->
+
+    <h1 class="glavni_tekst"><i class="fa fas fa-home"></i> {{ text._2 }}</h1>
+    <br>
+
+    <h2>{{text._1511}}</h2>
+    <div class="zamenaTabele" [hidden]="niz1.length != 0">{{text._1547}}</div>
+    <div [hidden]="niz1.length == 0">
+        <br>
+        <div class="tabela">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="onemoguceno"> 
+                        <th scope="col" style="width: 15%;"><b>{{text._1512}}</b></th>
+                        <th scope="col" style="width: 15%;"><b>{{text._1513}}</b></th>
+                        <th scope="col" style="width: 15%;"><b>{{text._1514}}</b></th>
+                        <!--<th scope="col" style="width: 15%;"><b>{{text._1515}}</b></th>-->
+                        <th scope="col" style="width: 15%"><b>{{text._1543}}</b></th>
+                        <th style="padding-right: 30%;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let i of niz1" class="table-info"  (click)="manageTurnir(i)" matTooltip="{{text._570}}" [matTooltipPosition]="position">
+                            <th scope="row">{{i.naziv_turnira}}</th>
+                            <td>{{i.naziv_igre}}</td>
+                            <td>{{i.datum_kraja_prijave | date:'short'}}</td>
+                            <!--<td>{{i.broj_ucesnika}}</td>-->
+                            <td>{{i.naziv_tipa_turnira}}</td>
+                            <td></td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br><hr><br>
+
+    <h2>{{text._1516}}</h2>
+    <div class="zamenaTabele" [hidden]="niz2.length != 0">{{text._1085}}</div>
+    <div [hidden]="niz2.length == 0" class="containter-fluid prazno">
+        <br>
+        <div class="row">
+            <div *ngFor="let korisnik of niz2" class="col-md-3 noselect"> 
+                <div class="card border-primary mb-3 hover" style="max-width: 20rem;" (click)="proslediDoKorisnika(korisnik.id_korisnika)">
+                    <div class="card-header" style="text-align: center">
+                        <h4>
+                            <b>{{korisnik.korisnicko_ime}}</b>
+                            <img class="slicica_kartica" src="{{server}}/images/avatar/{{korisnik.avatar}}">
+                        </h4>
+                    </div>
+                    <div class="card-body" style="min-height: 200px">
+                        <p class="card-text"><b>{{text._1517}}</b> {{korisnik.drzava}}</p><hr>
+                        <p class="card-text"><b>{{text._1518}}</b> {{korisnik.organizacija}}</p><hr>
+                        <p class="card-text"><b>{{text._1519}}</b> {{korisnik.email}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <br><hr><br>
+
+    <h2>{{text._1546}}</h2>
+    <div class="zamenaTabele" [hidden]="niz3.length != 0">{{text._1547}}</div>
+    <div [hidden]="niz3.length == 0">
+        <br>
+        <div class="tabela">
+            <table class="table table-hover">
+                <thead>
+                    <tr class="onemoguceno">
+                        <th scope="col" style="width: 15%"><b>{{text._1512}}</b></th>
+                        <th scope="col" style="width: 15%"><b>{{text._1513}}</b></th>
+                        <th scope="col" style="width: 15%"><b>{{text._1551}}</b></th>
+                        <!--<th scope="col" style="width: 15%" ><b>{{text._1515}}</b></th>-->
+                        <th scope="col" style="width: 15%"><b>{{text._1543}}</b></th>
+                        <th style="padding-left: 30%;"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i of niz3" class="table-info" (click)="ManageFinished(i)" matTooltip="{{text._570}}" [matTooltipPosition]="position">
+                            <th scope="row">{{i.naziv_turnira}}</th>
+                            <td>{{i.naziv_igre}}</td>
+                            <td>{{i.datum_odigravanja | date:'short'}}</td>
+                            <!--<td>{{i.broj_ucesnika}}</td>-->
+                            <td>{{i.naziv_tipa_turnira}}</td>
+                            <td></td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <br><hr><br>
+
+    <div class="col-lg-12" style="text-align: center">
+        <br/>
+        <br/>
+        <div style="display: block;" >
+                <div [chart]="chartIgre"></div>
+        </div>    
+    </div>
+
+    <div class="divSlike">
+        <img src='./assets/images/pocetna02.gif' />
+    </div>
+    
+</div>
+    

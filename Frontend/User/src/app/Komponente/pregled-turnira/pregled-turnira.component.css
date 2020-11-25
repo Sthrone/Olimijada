@@ -1,0 +1,94 @@
+mat-option
+{
+    color: black;
+    
+}
+
+mat-option::selection
+{
+    color: black;
+    font-weight: bold;
+    
+}
+
+mat-form-field
+{
+    color: white;
+}
+
+td a
+{
+    color: black;
+}
+
+td
+{
+    color: black;
+}
+
+option
+{
+    color:black;
+}
+
+.btn
+{
+    margin-top: 4px;
+}
+
+.dodaj
+{
+    font-weight: bold;
+}
+
+.dodaj:hover
+{
+    color: #f1c605;
+}
+.slika{
+    width:110px;
+    float:left;
+}
+
+.nazivTura
+{
+    padding-left:10px;
+    font-size:12pt;
+}
+
+.info{
+    font-size:10pt;
+    padding-right:50px;
+    padding-left:30px;
+    border-right:0.5pt groove grey;
+}
+.infokraj{
+    padding-right:50px;
+    padding-left:30px;
+}
+tr,td,table{
+    text-align:right;
+    padding-left:10px;
+    padding-right:20px;
+}
+table{
+    width:600px;
+}
+button.btn-primary{
+    width:100px;
+    height:50px;
+}
+.nemaTurnira
+{
+    font-style: italic;
+}
+
+.ima_mesta
+{
+    color: green;
+}
+
+.nema_mesta
+{
+    color: red;
+}

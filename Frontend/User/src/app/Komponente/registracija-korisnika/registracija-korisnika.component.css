@@ -1,0 +1,77 @@
+label.filebutton{
+    /* width:120px;
+     height:40px;*/
+     overflow:hidden;
+     position:relative;
+     background-color:transparent;
+ }
+ 
+ label span input {
+     z-index: 999;
+     line-height: 0;
+     font-size: 50px;
+     position: absolute;
+     top: 0;
+     left: 0;
+     opacity: 0;
+     filter: alpha(opacity = 0);
+     -ms-filter: "alpha(opacity=0)";
+     cursor: pointer;
+     _cursor: hand;
+     margin: 0;
+     padding:0;
+     height: 100%;
+ }
+ 
+ mat-form-field
+ {
+   width: 50%;
+ }
+
+ .slika {
+   position: relative;
+   width: 100%;
+ }
+ 
+ .image {
+   display: block;
+   width: 100%;
+   height: auto;
+ }
+ 
+ .overlay {
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background-color: #008CBA;
+   overflow: hidden;
+   height: 0;
+   transition: .5s ease;
+   opacity: 0.7;
+ }
+ 
+ .slika:hover .overlay {
+   height: 95%;
+   bottom: 5%;
+ }
+ 
+ .text {
+   white-space: nowrap; 
+   color: white;
+ 
+   font-size: 20px;
+   position: absolute;
+   overflow: hidden;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   -ms-transform: translate(-50%, -50%);
+   opacity: 1;
+   padding: 0;
+ }
+ .text span{
+   opacity: 1;
+ }
+
+ 

@@ -1,0 +1,11 @@
+-kad se ulogujes i udjes na igre izbacuje error: [objeck Object]
+-nema botova za ovu igru) kada je na engleskom u bots igre (reseno)
+-u konzoli ispusuje nizove neke, kad se klikne na odredjeni mecu u kupu (reseno)
+-kup april fools ispisuje user kao drugog igraca a ne postoji prvi (zbog nedostatka podatak u bazi)
+-u pregled lige namestiti da kad klikne prvi put fokus stranice prebaci na pregled meca (reseno)
+-kup pregled ne pronalazi resp[0], kada se otvori prijava za turnir otvara se i pregled kupa (ne znam zasto mi se pojavilo)
+-za dugme prijava na turnir prebaci u novi red
+-kada se prijavi na turnir i odustane ostaje niz igraca i nakon toga moze da dodaje igrace koliko zeli, nema granice (reseno)
+-kreiranje turnira - izmena igara (proverio stefa) ima greska u izmeni 
+-kada harkodiram link npr u pregled igara i stavim 0 izbacuje u konzoli igra is undifined
+-

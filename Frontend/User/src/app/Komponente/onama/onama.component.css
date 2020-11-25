@@ -1,0 +1,17 @@
+#naslov
+{
+    width: 100%;
+    text-align: center;
+}
+
+#brojKorisnika
+{
+    font-size: 36px;
+}
+
+.sredina
+{
+    position: relative;
+    top: 50%;
+    vertical-align: middle;
+}

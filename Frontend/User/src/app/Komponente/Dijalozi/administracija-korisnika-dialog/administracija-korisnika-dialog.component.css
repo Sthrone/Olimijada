@@ -1,0 +1,15 @@
+.dugme
+{
+    height: 40px;
+    width: 130px; 
+    background-color: green;
+    border: 1px solid green;
+    color: white;
+    margin-top: -20px;
+}
+
+mat-radio-button
+{
+    display: block;
+    margin-bottom: 10px;
+}

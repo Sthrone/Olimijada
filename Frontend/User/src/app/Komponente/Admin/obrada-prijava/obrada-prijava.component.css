@@ -1,0 +1,32 @@
+.right
+{
+    font-weight: bold;
+    color: green;
+}
+
+.wrong
+{
+    font-weight: bold;
+    color: red;
+}
+
+.btn
+{
+    width: 100%;
+}
+
+h6
+{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.just
+{
+    text-align: left;
+}
+
+#glavni
+{
+    margin-left: 10px;
+}
